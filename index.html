@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AMCARES - Awareness and Medical Care for Organ Recipients and Supporters</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    body { font-family: 'Arial', sans-serif; }
+    .hero-bg { background-image: url('https://images.unsplash.com/photo-1576091160550-2173fdabea48?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80'); }
+    /* Custom Color Palette */
+    :root {
+      --primary-red: #EF4444; /* Vibrant red for life and urgency */
+      --secondary-yellow: #FBBF24; /* Warm yellow for hope and optimism */
+      --accent-blue: #3B82F6; /* Trustworthy blue for reliability */
+      --light-pink: #FFE4E6; /* Soft pink for compassion and care */
+      --dark-gray: #1F2937; /* Dark gray for text and contrast */
+      --off-white: #FFF7ED; /* Warm off-white for backgrounds */
+    }
+    .navbar-bg { background-color: var(--accent-blue); }
+    .hero-overlay { background-color: rgba(0, 0, 0, 0.6); }
+    .section-bg-light { background-color: var(--off-white); }
+    .section-bg-pink { background-color: var(--light-pink); }
+    .text-primary { color: var(--primary-red); }
+    .text-secondary { color: var(--secondary-yellow); }
+    .text-accent { color: var(--accent-blue); }
+    .bg-primary { background-color: var(--primary-red); }
+    .bg-secondary { background-color: var(--secondary-yellow); }
+    .bg-accent { background-color: var(--accent-blue); }
+    .hover\:bg-primary-dark:hover { background-color: #DC2626; }
+    .hover\:bg-secondary-dark:hover { background-color: #F59E0B; }
+    .hover\:bg-accent-dark:hover { background-color: #2563EB; }
+    .icon-primary { color: var(--primary-red); }
+    .icon-secondary { color: var(--secondary-yellow); }
+    .icon-accent { color: var(--accent-blue); }
+  </style>
+</head>
+<body class="bg-gray-100">
+  <!-- Navbar -->
+  <nav class="navbar-bg text-white p-4 sticky top-0 z-10">
+    <div class="container mx-auto flex justify-between items-center">
+      <a href="/" class="text-2xl font-bold">AMCARES HEALTH ORGANIZATION</a>
+      <div class="space-x-4">
+        <a href="#home" class="hover:text-secondary">Home</a>
+        <a href="#about" class="hover:text-secondary">About</a>
+        <a href="#pledge" class="hover:text-secondary">Pledge to Donate</a>
+        <a href="#resources" class="hover:text-secondary">Resources</a>
+        <a href="#support" class="hover:text-secondary">Support</a>
+        <a href="#donate" class="hover:text-secondary">Donate</a>
+        <a href="#contact" class="hover:text-secondary">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero-bg bg-cover bg-center h-96 flex items-center justify-center text-center text-white">
+    <div class="hero-overlay p-8 rounded-lg">
+      <h1 class="text-4xl font-bold mb-4">AMCARES: Saving Lives Through Organ Donation</h1>
+      <p class="text-lg mb-6">Join us in raising awareness and supporting organ donors and recipients across India.</p>
+      <a href="#pledge" class="bg-primary hover:bg-primary-dark text-white font-bold py-2 px-4 rounded">Pledge to Donate</a>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about" class="py-16 section-bg-light">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold text-center mb-8 text-dark-gray">About AMCARES</h2>
+      <p class="text-lg text-dark-gray max-w-3xl mx-auto">
+        AMCARES (Awareness and Medical Care for Organ Recipients and Supporters) is a non-profit dedicated to promoting organ donation in India. Our mission is to educate communities, facilitate organ pledges, and support patients and families through the transplant journey. With only 0.65 donors per million population in India, we aim to bridge the gap between the 500,000 organs needed annually and the 3,500 transplants performed.
+      </p>
+      <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+        <div>
+          <i class="fas fa-heart text-4xl icon-primary mb-4"></i>
+          <h3 class="text-xl font-semibold text-dark-gray">Raise Awareness</h3>
+          <p class="text-dark-gray">Educate the public about organ donation and dispel myths.</p>
+        </div>
+        <div>
+          <i class="fas fa-hand-holding-heart text-4xl icon-accent mb-4"></i>
+          <h3 class="text-xl font-semibold text-dark-gray">Facilitate Donation</h3>
+          <p class="text-dark-gray">Connect donors and recipients through our pledge registry.</p>
+        </div>
+        <div>
+          <i class="fas fa-users text-4xl icon-secondary mb-4"></i>
+          <h3 class="text-xl font-semibold text-dark-gray">Support Families</h3>
+          <p class="text-dark-gray">Provide counseling and financial guidance for transplant patients.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pledge Section -->
+  <section id="pledge" class="py-16 section-bg-pink">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold text-center mb-8 text-dark-gray">Pledge to Be an Organ Donor</h2>
+      <p class="text-lg text-dark-gray max-w-3xl mx-auto text-center mb-8">
+        One donor can save up to 8 lives. Register today to pledge your organs and join our mission to save lives. Your decision can bring hope to thousands waiting for a transplant.
+      </p>
+      <form id="pledge-form" class="max-w-lg mx-auto bg-white p-8 rounded-lg shadow-md">
+        <div class="mb-4">
+          <label for="name" class="block text-dark-gray font-semibold">Full Name</label>
+          <input type="text" id="name" required class="w-full p-2 mt-1 border rounded focus:outline-none focus:ring-2 focus:ring-accent">
+        </div>
+        <div class="mb-4">
+          <label for="email" class="block text-dark-gray font-semibold">Email</label>
+          <input type="email" id="email" required class="w-full p-2 mt-1 border rounded focus:outline-none focus:ring-2 focus:ring-accent">
+        </div>
+        <div class="mb-4">
+          <label for="phone" class="block text-dark-gray font-semibold">Phone Number</label>
+          <input type="tel" id="phone" required class="w-full p-2 mt-1 border rounded focus:outline-none focus:ring-2 focus:ring-accent">
+        </div>
+        <div class="mb-4">
+          <label for="blood-group" class="block text-dark-gray font-semibold">Blood Group</label>
+          <select id="blood-group" required class="w-full p-2 mt-1 border rounded focus:outline-none focus:ring-2 focus:ring-accent">
+            <option value="">Select Blood Group</option>
+            <option value="A+">A+</option>
+            <option value="A-">A-</option>
+            <option value="B+">B+</option>
+            <option value="B-">B-</option>
+            <option value="AB+">AB+</option>
+            <option value="AB-">AB-</option>
+            <option value="O+">O+</option>
+            <option value="O-">O-</option>
+          </select>
+        </div>
+        <button type="submit" class="w-full bg-accent hover:bg-accent-dark text-white font-bold py-2 rounded">Submit Pledge</button>
+      </form>
+      <p id="pledge-message" class="text-center mt-4 text-primary hidden">Thank you for pledging! You'll receive a donor card soon.</p>
+    </div>
+  </section>
+
+  <!-- Resources Section -->
+  <section id="resources" class="py-16 section-bg-light">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold text-center mb-8 text-dark-gray">Resources</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <h3 class="text-xl font-semibold mb-4 text-dark-gray">What is Organ Donation?</h3>
+          <p class="text-dark-gray">Learn about deceased and living organ donation, including brain death and how one donor can save up to 8 lives.</p>
+          <a href="#" class="text-accent hover:underline mt-4 inline-block">Read More</a>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <h3 class="text-xl font-semibold mb-4 text-dark-gray">Myths vs. Facts</h3>
+          <p class="text-dark-gray">Dispel common myths, such as organ donation conflicting with religious beliefs or affecting medical care.</p>
+          <a href="#" class="text-accent hover:underline mt-4 inline-block">Read More</a>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <h3 class="text-xl font-semibold mb-4 text-dark-gray">Transplant Process</h3>
+          <p class="text-dark-gray">Understand the steps of liver transplantation, from evaluation to post-transplant care.</p>
+          <a href="#" class="text-accent hover:underline mt-4 inline-block">Read More</a>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-md">
+          <h3 class="text-xl font-semibold mb-4 text-dark-gray">Success Stories</h3>
+          <p class="text-dark-gray">Read inspiring stories of donors and recipients who have transformed lives.</p>
+          <a href="#" class="text-accent hover:underline mt-4 inline-block">Read More</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Support Section -->
+  <section id="support" class="py-16 section-bg-pink">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold text-center mb-8 text-dark-gray">Support for Patients and Families</h2>
+      <p class="text-lg text-dark-gray max-w-3xl mx-auto text-center mb-8">
+        AMCARES provides counseling, financial guidance, and logistical support for transplant patients and their families. Contact us to learn about funding options and hospital partnerships.
+      </p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+        <div>
+          <i class="fas fa-comment-medical text-4xl icon-primary mb-4"></i>
+          <h3 class="text-xl font-semibold text-dark-gray">Counseling</h3>
+          <p class="text-dark-gray">Emotional support for donors, recipients, and families.</p>
+        </div>
+        <div>
+          <i class="fas fa-hospital text-4xl icon-accent mb-4"></i>
+          <h3 class="text-xl font-semibold text-dark-gray">Hospital Partnerships</h3>
+          <p class="text-dark-gray">Connections with top transplant centers like Medanta and Apollo.</p>
+        </div>
+        <div>
+          <i class="fas fa-donate text-4xl icon-secondary mb-4"></i>
+          <h3 class="text-xl font-semibold text-dark-gray">Financial Aid</h3>
+          <p class="text-dark-gray">Guidance on funding and government schemes like NOTP.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Donate Section -->
+  <section id="donate" class="py-16 section-bg-light">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold text-center mb-8 text-dark-gray">Support Our Mission</h2>
+      <p class="text-lg text-dark-gray max-w-3xl mx-auto text-center mb-8">
+        Your donations help us raise awareness, support patients, and facilitate organ donations. Every contribution saves lives.
+      </p>
+      <div class="text-center">
+        <a href="#" class="bg-secondary hover:bg-secondary-dark text-dark-gray font-bold py-2 px-4 rounded">Donate Now</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-16 section-bg-pink">
+    <div class="container mx-auto px-4">
+      <h2 class="text-3xl font-bold text-center mb-8 text-dark-gray">Contact Us</h2>
+      <p class="text-lg text-dark-gray max-w-3xl mx-auto text-center mb-8">
+        Reach out to AMCARES for inquiries, partnerships, or support. Call our helpline or email us.
+      </p>
+      <div class="text-center">
+        <p><i class="fas fa-phone-alt mr-2 icon-primary"></i> Toll-Free: 1800-300-AMCARES</p>
+        <p><i class="fas fa-envelope mr-2 icon-primary"></i> info@amcares.org</p>
+        <p><i class="fas fa-map-marker-alt mr-2 icon-primary"></i> Delhi, India</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-accent text-white p-4">
+    <div class="container mx-auto px-4 text-center">
+      <p>© 2025 AMCARES. All rights reserved.</p>
+      <div class="mt-4 space-x-4">
+        <a href="#" class="hover:text-secondary"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="hover:text-secondary"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="hover:text-secondary"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="hover:text-secondary"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Pledge Form Submission
+    document.getElementById('pledge-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const phone = document.getElementById('phone').value;
+      const bloodGroup = document.getElementById('blood-group').value;
+
+      // Simulate form submission (replace with actual backend integration)
+      console.log('Pledge Submitted:', { name, email, phone, bloodGroup });
+      document.getElementById('pledge-message').classList.remove('hidden');
+      document.getElementById('pledge-form').reset();
+
+      // Hide message after 5 seconds
+      setTimeout(() => {
+        document.getElementById('pledge-message').classList.add('hidden');
+      }, 5000);
+    });
+  </script>
+</body>
+</html>
