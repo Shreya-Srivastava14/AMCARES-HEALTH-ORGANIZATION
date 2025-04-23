@@ -3,283 +3,358 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="AMCARES - AI-powered liver transplant support and organ donation awareness. Join our mission!">
-  <title>AMCARES - AI-Powered Liver Transplant Support</title>
+  <title>AM Cares - HealthTech Solutions</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Montserrat:wght@700&display=swap" rel="stylesheet">
   <style>
-    .smooth-scroll {
-      scroll-behavior: smooth;
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      overflow-x: hidden;
     }
-    .section {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.8s ease, transform 0.8s ease;
-    }
-    .section.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .card {
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-    .card:hover {
-      transform: scale(1.05);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
-    }
-    .modal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.8);
-      z-index: 1000;
+    .slide {
+      min-height: 100vh;
+      display: flex;
       align-items: center;
       justify-content: center;
+      padding: 1rem;
     }
-    .modal.active {
-      display: flex;
-    }
-    .modal-content {
-      background: white;
-      max-width: 90vw;
-      max-height: 90vh;
-      overflow-y: auto;
-      padding: 1.5rem;
-      border-radius: 1.5rem;
-      animation: zoomIn 0.5s ease-in;
-    }
-    @keyframes zoomIn {
-      0% { transform: scale(0.8); opacity: 0; }
-      100% { transform: scale(1); opacity: 1; }
-    }
-    .chatbot {
-      position: fixed;
-      bottom: 1rem;
-      right: 1rem;
-      z-index: 100;
-    }
-    .chatbot-toggle {
-      transition: transform 0.3s ease;
-    }
-    .chatbot-toggle:hover {
-      transform: scale(1.1);
-    }
-    .chatbot-window {
-      transform: translateY(100%);
-      transition: transform 0.3s ease;
-    }
-    .chatbot-window.active {
-      transform: translateY(0);
-    }
-    .cta-button {
-      transition: background-color 0.3s ease, transform 0.3s ease;
-    }
-    .cta-button:hover {
-      transform: scale(1.1);
-    }
-    .collapsible-content {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.4s ease;
-    }
-    .collapsible-content.active {
-      max-height: 600px;
-    }
-    .parallax {
-      background-attachment: fixed;
+    .hero-bg {
+      background-image: linear-gradient(rgba(0, 0, 50, 0.7), rgba(0, 0, 50, 0.7)), url('https://images.unsplash.com/photo-1576091160550-3856e3f28322?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
       background-size: cover;
       background-position: center;
     }
-    .carousel-item {
+    .fade-in {
       opacity: 0;
-      transition: opacity 1s ease;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
     }
-    .carousel-item.active {
+    .fade-in.visible {
       opacity: 1;
+      transform: translateY(0);
     }
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      cursor: pointer;
+    .hover-scale {
+      transition: transform 0.3s ease;
     }
-    .hamburger span {
-      width: 25px;
-      height: 3px;
-      background: white;
-      margin: 2px 0;
+    .hover-scale:hover {
+      transform: scale(1.03);
+    }
+    input, select {
       transition: all 0.3s ease;
     }
+    input:focus, select:focus {
+      border-color: #1e40af;
+      box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.2);
+    }
+    .nav-link:hover {
+      border-bottom: 2px solid #bfdbfe;
+    }
+    .chatbot-container {
+      position: fixed;
+      bottom: 1rem;
+      right: 1rem;
+      z-index: 1000;
+    }
+    .chatbot-button {
+      background-color: #1e40af;
+      color: white;
+      border-radius: 50%;
+      width: 56px;
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(30, 64, 175, 0.4);
+      transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+    .chatbot-button:hover {
+      background-color: #2563eb;
+      transform: scale(1.1);
+    }
+    .chatbot-window {
+      display: none;
+      width: 320px;
+      max-width: 85vw;
+      height: 450px;
+      background: linear-gradient(145deg, #ffffff, #f0f4ff);
+      border-radius: 1rem;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+      animation: slideIn 0.3s ease-out;
+    }
+    @keyframes slideIn {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+    .chatbot-header {
+      background: linear-gradient(to right, #1e40af, #2563eb);
+      color: white;
+      padding: 0.75rem;
+      text-align: center;
+      border-bottom: 2px solid #bfdbfe;
+    }
+    .chatbot-messages {
+      height: 340px;
+      overflow-y: auto;
+      padding: 1rem;
+      background: #f9fafb;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    .chatbot-messages::-webkit-scrollbar {
+      width: 6px;
+    }
+    .chatbot-messages::-webkit-scrollbar-thumb {
+      background: #1e40af;
+      border-radius: 3px;
+    }
+    .user-message, .bot-message {
+      padding: 0.5rem 0.75rem;
+      border-radius: 0.75rem;
+      max-width: 80%;
+      word-wrap: break-word;
+      animation: messageFade 0.3s ease;
+    }
+    @keyframes messageFade {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .user-message {
+      background-color: #bfdbfe;
+      color: #1e40af;
+      margin-left: auto;
+      align-self: flex-end;
+    }
+    .bot-message {
+      background-color: #e5e7eb;
+      color: #374151;
+      margin-right: auto;
+      align-self: flex-start;
+    }
+    .typing-indicator {
+      display: none;
+      font-size: 0.8rem;
+      color: #6b7280;
+      margin-bottom: 0.5rem;
+      align-self: flex-start;
+    }
+    .typing-indicator span {
+      animation: blink 0.5s infinite alternate;
+      display: inline-block;
+    }
+    .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+    .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes blink {
+      0% { opacity: 0.2; }
+      100% { opacity: 1; }
+    }
+    .chatbot-input {
+      display: flex;
+      align-items: center;
+      padding: 0.5rem;
+      background: #ffffff;
+      border-top: 1px solid #e5e7eb;
+      gap: 0.5rem;
+    }
+    .chatbot-input input {
+      flex-grow: 1;
+      padding: 0.5rem;
+      border: 1px solid #d1d5db;
+      border-radius: 0.5rem;
+      outline: none;
+      font-size: 0.85rem;
+      transition: border-color 0.3s ease;
+    }
+    .chatbot-input input:focus {
+      border-color: #1e40af;
+    }
+    .chatbot-input button {
+      background: linear-gradient(to right, #1e40af, #2563eb);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 0.5rem;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.85rem;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+    .chatbot-input button:hover {
+      background: linear-gradient(to right, #2563eb, #1e40af);
+      transform: translateY(-2px);
+    }
+    /* Mobile Responsive Styles */
     @media (max-width: 768px) {
-      .hamburger {
-        display: flex;
+      .slide {
+        padding: 1rem;
       }
-      .nav-links {
+      .nav-container {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .nav-menu {
         display: none;
         flex-direction: column;
         width: 100%;
-        position: absolute;
-        top: 64px;
-        left: 0;
-        background: #1E3A8A;
-        padding: 1rem;
+        padding-top: 1rem;
       }
-      .nav-links.active {
+      .nav-menu.active {
         display: flex;
       }
-      .modal-content {
-        padding: 1rem;
-        max-width: 95vw;
+      .nav-link {
+        padding: 0.5rem 0;
+        font-size: 1rem;
+      }
+      .hamburger {
+        display: block;
+        cursor: pointer;
       }
       .chatbot-window {
-        width: 100%;
-        max-width: 90vw;
-        bottom: 0;
-        right: 0;
-        border-radius: 1rem 1rem 0 0;
+        width: 85vw;
+        height: 70vh;
+        max-height: 450px;
+      }
+      .chatbot-messages {
+        height: calc(70vh - 110px);
+      }
+      .chatbot-button {
+        width: 48px;
+        height: 48px;
+      }
+      .chatbot-button svg {
+        width: 24px;
+        height: 24px;
+      }
+      .hero-bg {
+        background-attachment: scroll;
+      }
+      .text-5xl {
+        font-size: 2.5rem;
+      }
+      .text-4xl {
+        font-size: 2rem;
+      }
+      .text-xl {
+        font-size: 1.25rem;
+      }
+      .max-w-5xl, .max-w-4xl, .max-w-3xl {
+        max-width: 100%;
+      }
+      .grid-cols-3 {
+        grid-template-columns: 1fr;
+      }
+      .max-w-lg {
+        max-width: 100%;
       }
     }
   </style>
 </head>
-<body class="font-sans text-gray-800 smooth-scroll" style="font-family: 'Roboto', sans-serif;">
-  <!-- Navigation -->
-  <nav class="bg-blue-900 text-white sticky top-0 z-50 shadow-xl">
-    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-      <a href="#home" class="text-3xl sm:text-4xl font-bold" style="font-family: 'Montserrat', sans-serif;">AMCARES</a>
-      <div class="hamburger">
-        <span></span>
-        <span></span>
-        <span></span>
+<body class="bg-gray-50">
+  <!-- Navigation Bar -->
+  <nav class="bg-blue-900 text-white p-4 shadow-lg z-10 sticky top-0">
+    <div class="container mx-auto nav-container flex justify-between items-center">
+      <h1 class="text-2xl font-bold font-montserrat">AM Cares</h1>
+      <div class="hamburger md:hidden">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+        </svg>
       </div>
-      <div class="nav-links flex space-x-4 sm:space-x-6 text-base sm:text-lg">
-        <a href="#home" class="nav-link hover:text-blue-300 transition">Home</a>
-        <a href="#about" class="nav-link hover:text-blue-300 transition">About Us</a>
-        <a href="#doctors" class="nav-link hover:text-blue-300 transition">About Doctors</a>
-        <a href="#programs" class="nav-link hover:text-blue-300 transition">Programs</a>
-        <a href="#be-a-donor" class="nav-link hover:text-blue-300 transition">Donate</a>
-        <a href="#events" class="nav-link hover:text-blue-300 transition">Events</a>
-        <a href="#mission" class="nav-link hover:text-blue-300 transition">Our Mission</a>
-        <a href="#" data-page="story" class="nav-link hover:text-blue-300 transition">Our Story</a>
-        <a href="#contact" class="nav-link hover:text-blue-300 transition">Contact Us</a>
-      </div>
+      <ul class="nav-menu md:flex md:space-x-6 text-base font-inter">
+        <li><a href="#home" class="nav-link pb-1 transition-colors">Home</a></li>
+        <li><a href="#about" class="nav-link pb-1 transition-colors">About Us</a></li>
+        <li><a href="#doctors" class="nav-link pb-1 transition-colors">Our Doctors</a></li>
+        <li><a href="#donor" class="nav-link pb-1 transition-colors">Be a Donor</a></li>
+        <li><a href="#services" class="nav-link pb-1 transition-colors">Services</a></li>
+        <li><a href="#contact" class="nav-link pb-1 transition-colors">Contact Us</a></li>
+      </ul>
     </div>
   </nav>
 
-  <!-- Sections -->
-  <div class="min-h-screen">
-    <!-- Home Section with Carousel -->
-    <section id="home" class="section relative h-screen parallax" style="background-image: url('https://images.unsplash.com/photo-1576091160550-2173fdabe37f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');">
-      <div class="absolute inset-0 bg-blue-900 bg-opacity-60"></div>
-      <div class="container mx-auto px-4 h-full flex items-center justify-center text-center relative z-10">
-        <div class="carousel w-full">
-          <div class="carousel-item active">
-            <h1 class="text-4xl sm:text-5xl md:text-7xl font-bold text-white mb-6" style="font-family: 'Montserrat', sans-serif;">Transform Lives with AMCARES</h1>
-            <p class="text-lg sm:text-xl text-white mb-8">AI-powered support for liver transplant patients and organ donation awareness.</p>
-            <a href="#be-a-donor" class="nav-link cta-button bg-blue-500 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold hover:bg-blue-600">Join Our Mission</a>
-          </div>
+  <!-- Home Slide -->
+  <section id="home" class="slide hero-bg text-white">
+    <div class="container mx-auto text-center px-4 py-16 fade-in">
+      <h2 class="text-5xl font-bold font-montserrat mb-6">Welcome to AM Cares</h2>
+      <p class="text-xl mb-8 max-w-3xl mx-auto font-inter">Delivering innovative healthtech solutions and compassionate care to empower healthier communities.</p>
+      <a href="#contact" class="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold font-inter hover:bg-blue-700 hover-scale text-base">Get Started</a>
+    </div>
+  </section>
+
+  <!-- About Us Slide -->
+  <section id="about" class="slide bg-white">
+    <div class="container mx-auto px-4 text-center fade-in">
+      <h2 class="text-4xl font-bold font-montserrat mb-8 text-blue-900">About Us</h2>
+      <div class="max-w-4xl mx-auto">
+        <p class="text-lg text-gray-700 mb-6 font-inter">
+          AM Cares is a leading healthtech organization dedicated to transforming healthcare delivery through innovation and compassion. Our mission is to provide accessible, high-quality medical services and support programs to enhance community well-being.
+        </p>
+        <p class="text-lg text-gray-700 font-inter">
+          With a team of experienced professionals and cutting-edge technology, we are committed to making healthcare equitable and effective for all. Join us in shaping the future of health.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Our Doctors Slide -->
+  <section id="doctors" class="slide bg-blue-50">
+    <div class="container mx-auto px-4 text-center fade-in">
+      <h2 class="text-4xl font-bold font-montserrat mb-8 text-blue-900">Our Doctors</h2>
+      <p class="text-lg text-gray-700 max-w-3xl mx-auto mb-6 font-inter">
+        Meet our esteemed specialists from Max Hospital, leaders in liver, kidney, and heart care, dedicated to delivering exceptional medical expertise.
+      </p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        <div class="bg-white p-6 rounded-lg shadow-md hover-scale">
+          <h3 class="text-xl font-semibold mb-4 text-blue-900 font-montserrat">Dr. Subash Gupta</h3>
+          <p class="text-gray-600 font-inter mb-2">Chairman, Liver & Biliary Sciences</p>
+          <p class="text-gray-600 font-inter">Renowned for pioneering liver transplantation in India, Dr. Gupta specializes in complex liver surgeries and transplant procedures, with decades of experience at Max Hospital, Saket.</p>
+          <a href="https://www.maxhealthcare.in" target="_blank" class="text-blue-600 hover:underline font-inter mt-4 inline-block">Learn More</a>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-md hover-scale">
+          <h3 class="text-xl font-semibold mb-4 text-blue-900 font-montserrat">Dr. Puneet Arora</h3>
+          <p class="text-gray-600 font-inter mb-2">Associate Director, Nephrology</p>
+          <p class="text-gray-600 font-inter">With over 20 years of experience, Dr. Arora leads kidney care at Max Hospital, Dehradun, specializing in dialysis and kidney transplantation for chronic kidney conditions.</p>
+          <a href="https://www.maxhealthcare.in" target="_blank" class="text-blue-600 hover:underline font-inter mt-4 inline-block">Learn More</a>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-md hover-scale">
+          <h3 class="text-xl font-semibold mb-4 text-blue-900 font-montserrat">Dr. Gaurav Gupta</h3>
+          <p class="text-gray-600 font-inter mb-2">Consultant, Cardiac Sciences</p>
+          <p class="text-gray-600 font-inter">A specialist in robotic heart surgeries and complex cardiac procedures, Dr. Gupta provides cutting-edge care at Max Hospital, Dehradun, ensuring optimal heart health outcomes.</p>
+          <a href="https://www.maxhealthcare.in" target="_blank" class="text-blue-600 hover:underline font-inter mt-4 inline-block">Learn More</a>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- About Us Section -->
-    <section id="about" class="section py-16 sm:py-24 bg-white">
-      <div class="container mx-auto px-4">
-        <h2 class="text-4xl sm:text-5xl font-bold text-center mb-8 sm:mb-12" style="font-family: 'Montserrat', sans-serif; color: #1E3A8A;">About AMCARES</h2>
-        <button id="about-read-aloud" class="cta-button bg-blue-500 text-white px-4 py-2 rounded-full mb-6 hover:bg-blue-600" style="font-family: 'Montserrat', sans-serif;">Read Aloud</button>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12 items-center">
+  <!-- Be a Donor Slide -->
+  <section id="donor" class="slide bg-blue-50">
+    <div class="container mx-auto px-4 text-center fade-in">
+      <h2 class="text-4xl font-bold font-montserrat mb-8 text-blue-900">Be a Donor</h2>
+      <p class="text-lg text-gray-700 max-w-3xl mx-auto mb-6 font-inter">
+        Support our mission to provide life-changing healthcare. Register as a donor to contribute to our programs and help those in need.
+      </p>
+      <div class="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-lg hover-scale">
+        <div class="space-y-4">
           <div>
-            <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="AI-generated AMCARES team" class="rounded-2xl shadow-xl card lazy-load" loading="lazy">
-            <p class="text-sm text-gray-600 mt-2">AI-generated image of a compassionate healthcare team.</p>
+            <label for="name" class="block text-left text-blue-900 font-semibold mb-2 font-inter">Name</label>
+            <input type="text" id="name" class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-800 font-inter" placeholder="Enter your full name" required>
           </div>
           <div>
-            <p class="text-base sm:text-lg mb-6 text-gray-600">Founded in 2018 by Shreya Srivastava, AMCARES leverages AI to provide liver transplant patients with medical resources, counseling, and financial aid.</p>
-            <p class="text-base sm:text-lg mb-6 text-gray-600">Join AMCARES’ mission to ensure no one faces this journey alone. Our AI tools have impacted over 2,000 lives.</p>
-            <a href="#" data-page="story" class="nav-link text-blue-600 hover:underline font-semibold">Read Shreya’s Story</a>
-            <div class="mt-6 sm:mt-8">
-              <button class="collapsible text-blue-600 hover:underline font-semibold">AI-Powered FAQs</button>
-              <div class="collapsible-content">
-                <p class="text-gray-600 mt-4">Q: How does AMCARES use AI?<br>A: AI personalizes patient support and optimizes donor matching.</p>
-                <p class="text-gray-600 mt-2">Q: How can I help?<br>A: Register as a donor or spread awareness!</p>
-              </div>
-            </div>
+            <label for="age" class="block text-left text-blue-900 font-semibold mb-2 font-inter">Age</label>
+            <input type="number" id="age" class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-800 font-inter" placeholder="Enter your age" required>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- About Doctors Section -->
-    <section id="doctors" class="section py-16 sm:py-24 bg-blue-50">
-      <div class="container mx-auto px-4">
-        <h2 class="text-4xl sm:text-5xl font-bold text-center mb-8 sm:mb-12" style="font-family: 'Montserrat', sans-serif; color: #1E3A8A;">About Our Doctors</h2>
-        <button id="doctors-read-aloud" class="cta-button bg-blue-500 text-white px-4 py-2 rounded-full mb-6 hover:bg-blue-600" style="font-family: 'Montserrat', sans-serif;">Read Aloud</button>
-        <p class="text-base sm:text-xl text-center mb-6 sm:mb-8 text-gray-600">Our expert physicians use AI to advance liver transplant care.</p>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-xl card">
-            <h3 class="text-xl sm:text-2xl font-bold mb-4" style="font-family: 'Montserrat', sans-serif; color: #1E3A8A;">Dr. Subash Gupta</h3>
-            <p class="text-gray-600 mb-4">Chairman of Liver and Biliary Sciences at Max Hospital, Delhi. Pioneer of AI-assisted transplant techniques.</p>
-            <button class="collapsible text-blue-600 hover:underline">Learn More</button>
-            <div class="collapsible-content">
-              <p class="text-gray-600 mt-4">Dr. Gupta has performed over 3,000 AI-optimized liver transplants.</p>
-            </div>
+          <div>
+            <label for="city" class="block text-left text-blue-900 font-semibold mb-2 font-inter">City</label>
+            <input type="text" id="city" class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-800 font-inter" placeholder="Enter your city" required>
           </div>
-          <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-xl card">
-            <h3 class="text-xl sm:text-2xl font-bold mb-4" style="font-family: 'Montserrat', sans-serif; color: #1E3A8A;">Dr. Anjali Sharma</h3>
-            <p class="text-gray-600 mb-4">Hepatologist using AI for post-transplant care at AMCARES partner hospitals.</p>
-            <button class="collapsible text-blue-600 hover:underline">Learn More</button>
-            <div class="collapsible-content">
-              <p class="text-gray-600 mt-4">Dr. Sharma leverages AI for personalized patient recovery plans.</p>
-            </div>
+          <div>
+            <label for="country" class="block text-left text-blue-900 font-semibold mb-2 font-inter">Country</label>
+            <input type="text" id="country" class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-800 font-inter" placeholder="Enter your country" required>
           </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Programs Section -->
-    <section id="programs" class="section py-16 sm:py-24 bg-white">
-      <div class="container mx-auto px-4">
-        <h2 class="text-4xl sm:text-5xl font-bold text-center mb-8 sm:mb-12" style="font-family: 'Montserrat', sans-serif; color: #1E3A8A;">Our Programs</h2>
-        <button id="programs-read-aloud" class="cta-button bg-blue-500 text-white px-4 py-2 rounded-full mb-6 hover:bg-blue-600" style="font-family: 'Montserrat', sans-serif;">Read Aloud</button>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
-          <div class="bg-blue-50 p-6 sm:p-8 rounded-2xl shadow-xl card">
-            <h3 class="text-xl sm:text-2xl font-bold mb-4" style="font-family: 'Montserrat', sans-serif; color: #1E3A8A;">AI Transplant Support</h3>
-            <p class="text-gray-600">AI-driven resources and counseling. Supported 1,000+ patients.</p>
-          </div>
-          <div class="bg-blue-50 p-6 sm:p-8 rounded-2xl shadow-xl card">
-            <h3 class="text-xl sm:text-2xl font-bold mb-4" style="font-family: 'Montserrat', sans-serif; color: #1E3A8A;">Financial Aid</h3>
-            <p class="text-gray-600">AI-optimized grants for transplant costs. Awarded $500,000.</p>
-          </div>
-          <div class="bg-blue-50 p-6 sm:p-8 rounded-2xl shadow-xl card">
-            <h3 class="text-xl sm:text-2xl font-bold mb-4" style="font-family: 'Montserrat', sans-serif; color: #1E3A8A;">Community Education</h3>
-            <p class="text-gray-600">AI-powered awareness campaigns. Reached 5,000+ individuals.</p>
-          </div>
-          <div class="bg-blue-50 p-6 sm:p-8 rounded-2xl shadow-xl card">
-            <h3 class="text-xl sm:text-2xl font-bold mb-4" style="font-family: 'Montserrat', sans-serif; color: #1E3A8A;">Family Support</h3>
-            <p class="text-gray-600">AI-personalized counseling. Helped 800+ families.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Be a Donor Section -->
-    <section id="be-a-donor" class="section py-16 sm:py-24 bg-blue-50">
-      <div class="container mx-auto px-4">
-        <h2 class="text-4xl sm:text-5xl font-bold text-center mb-8 sm:mb-12" style="font-family: 'Montserrat', sans-serif; color: #1E3A8A;">Be a Donor</h2>
-        <p class="text-base sm:text-xl text-center mb-6 sm:mb-8 text-gray-600">Join AMCARES’ mission with AI-guided organ donor registration.</p>
-        <form id="donor-form" class="max-w-lg mx-auto bg-white p-6 sm:p-8 rounded-2xl shadow-xl">
-          <div class="mb-6">
-            <label for="donor-name" class="block text-base sm:text-lg font-medium text-gray-700" style="font-family: 'Montserrat', sans-serif;">Full Name</label>
-            <input type="text" id="donor-name" name="name" required class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-          </div>
-          <div class="mb-6">
-            <label for="donor-email" class="block text-base sm:text-lg font-medium text-gray-700" style="font-family: 'Montserrat', sans-serif;">Email Address</label>
-            <input type="email" id="donor-email" name="email" required class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-          </div>
-          <div class="mb-6">
-            <label for="blood-group" class="block text-base sm:text-lg font-medium text-gray-700" style="font-family: 'Montserrat', sans-serif;">Blood Group</label>
-            <select id="blood-group" name="blood-group" required class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-              <option value="">Select Blood Group</option>
+          <div>
+            <label for="bloodgroup" class="block text-left text-blue-900 font-semibold mb-2 font-inter">Blood Group</label>
+            <select id="bloodgroup" class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-800 font-inter" required>
+              <option value="" disabled selected>Select your blood group</option>
               <option value="A+">A+</option>
               <option value="A-">A-</option>
               <option value="B+">B+</option>
@@ -289,160 +364,103 @@
               <option value="O+">O+</option>
               <option value="O-">O-</option>
             </select>
-            <p id="blood-group-tip" class="text-sm text-gray-600 mt-2">AI Tip: O- is a universal donor for liver transplants.</p>
           </div>
-          <div class="mb-6">
-            <label for="contact-number" class="block text-base sm:text-lg font-medium text-gray-700" style="font-family: 'Montserrat', sans-serif;">Contact Number</label>
-            <input type="tel" id="contact-number" name="contact-number" required class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <div>
+            <label for="contact" class="block text-left text-blue-900 font-semibold mb-2 font-inter">Contact Number</label>
+            <input type="tel" id="contact" class="w-full p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-800 font-inter" placeholder="Enter your contact number" required>
           </div>
-          <button type="submit" class="w-full cta-button bg-blue-500 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-600" style="font-family: 'Montserrat', sans-serif;">Register as Donor</button>
-        </form>
-      </div>
-    </section>
-
-    <!-- Events Section -->
-    <section id="events" class="section py-16 sm:py-24 bg-white">
-      <div class="container mx-auto px-4">
-        <h2 class="text-4xl sm:text-5xl font-bold text-center mb-8 sm:mb-12" style="font-family: 'Montserrat', sans-serif; color: #1E3A8A;">Upcoming Events</h2>
-        <p class="text-base sm:text-lg text-center mb-6 sm:mb-8 text-gray-600">AI-driven insights: <span id="event-insight">2 events scheduled, 500+ expected attendees.</span></p>
-        <div id="event-list" class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
-          <div class="bg-blue-50 p-6 sm:p-8 rounded-2xl shadow-xl card">
-            <h3 class="text-xl sm:text-2xl font-bold mb-4" style="font-family: 'Montserrat', sans-serif; color: #1E3A8A;">Liver Health Awareness Gala</h3>
-            <p class="text-sm text-gray-600">Date: June 15, 2025</p>
-            <p class="text-gray-600 mb-4">Join us for an evening of AI-enhanced education and fundraising.</p>
-            <p class="text-sm text-gray-600">Time left: <span id="gala-countdown"></span></p>
-            <button class="collapsible text-blue-600 hover:underline mt-4">Details</button>
-            <div class="collapsible-content">
-              <p class="text-gray-600 mt-4">Location: Grand Hotel, Delhi. RSVP by June 1.</p>
-            </div>
-          </div>
-          <div class="bg-blue-50 p-6 sm:p-8 rounded-2xl shadow-xl card">
-            <h3 class="text-xl sm:text-2xl font-bold mb-4" style="font-family: 'Montserrat', sans-serif; color: #1E3A8A;">Community Health Fair</h3>
-            <p class="text-sm text-gray-600">Date: July 20, 2025</p>
-            <p class="text-gray-600 mb-4">Free AI-powered health screenings and transplant education.</p>
-            <p class="text-sm text-gray-600">Time left: <span id="fair-countdown"></span></p>
-            <button class="collapsible text-blue-600 hover:underline mt-4">Details</button>
-            <div class="collapsible-content">
-              <p class="text-gray-600 mt-4">Location: Prayagraj Community Center. Open to all.</p>
-            </div>
+          <div>
+            <button onclick="alert('Thank you for registering as a donor! We will contact you soon.')" class="w-full bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold font-inter hover:bg-blue-700 hover-scale text-base">Submit</button>
           </div>
         </div>
-      </div>
-    </section>
-
-    <!-- Our Mission Section -->
-    <section id="mission" class="section py-16 sm:py-24 bg-blue-50 parallax" style="background-image: url('https://images.unsplash.com/photo-1584982751601-97dcc096659c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');">
-      <div class="absolute inset-0 bg-blue-900 bg-opacity-50"></div>
-      <div class="container mx-auto px-4 text-center relative z-10">
-        <h2 class="text-4xl sm:text-5xl font-bold text-white mb-8 sm:mb-12" style="font-family: 'Montserrat', sans-serif;">Our Mission & Vision</h2>
-        <button id="mission-read-aloud" class="cta-button bg-blue-500 text-white px-4 py-2 rounded-full mb-6 hover:bg-blue-600" style="font-family: 'Montserrat', sans-serif;">Read Aloud</button>
-        <p class="text-base sm:text-xl text-white mb-6">AMCARES uses AI to deliver unparalleled care, emotional support, and financial assistance to liver transplant patients.</p>
-        <p class="text-base sm:text-xl text-white mb-8">Our vision is a world where AI ensures no one faces a transplant alone, driven by smart education and advocacy.</p>
-        <a href="#be-a-donor" class="nav-link cta-button bg-blue-500 text-white px-6 sm:px-8 py-3 sm:py-4 rounded-full font-semibold hover:bg-blue-600">Support Our Mission</a>
-      </div>
-    </section>
-
-    <!-- Our Story Modal -->
-    <div id="story-modal" class="modal">
-      <div class="modal-content">
-        <h2 class="text-3xl sm:text-4xl font-bold mb-6 sm:mb-8 text-center" style="font-family: 'Montserrat', sans-serif; color: #1E3A8A;">Our Story - Shreya Srivastava</h2>
-        <button id="story-audio" class="cta-button bg-blue-500 text-white px-4 py-2 rounded-full mb-6 hover:bg-blue-600" style="font-family: 'Montserrat', sans-serif;">Play Audio Narration</button>
-        <p class="text-base sm:text-lg mb-6 text-gray-600">My name is Shreya Srivastava, and I currently work as a software developer. Beyond my professional life, I am a passionate technical enthusiast, but today, I want to share a deeply personal and emotional journey that has shaped who I am. This is a story of a significant challenge that tested my family’s strength and faith.</p>
-        <p class="text-base sm:text-lg mb-6 text-gray-600">The story begins on May 21, 2018. It was my parents’ anniversary, and we were celebrating together, filled with happiness and joy. The day was beautiful, but little did we know that our lives were about to change drastically. The very next day, my father fell seriously ill. We rushed him to a hospital in Prayagraj, where the doctors diagnosed him with liver cirrhosis and confirmed that water had accumulated in his liver. His treatment began immediately. For five days, the doctors worked tirelessly, draining the fluid from his liver using injections. However, after those five days, the doctors informed us that his condition was critical and referred us to another hospital for further treatment.</p>
-        <p class="text-base sm:text-lg mb-6 text-gray-600">Our next stop was PGI Lucknow, where we received devastating news—my father was diagnosed with liver cancer. The doctors explained that the only way to save him was through a liver transplant. In that moment, our world came crashing down. The thought of losing my father within six months, as predicted by the doctors, was unbearable. As the eldest daughter, I knew I had to stay strong for my family, even though I was only 17 years old at the time. While everyone else was consumed by grief, I held onto my faith and trusted God’s plan.</p>
-        <p class="text-base sm:text-lg mb-6 text-gray-600">Determined to fight for my father’s life, I began searching for the best liver surgeon in India. We traveled far and wide, visiting renowned hospitals like Gangaram Hospital, Medanta, Apollo, and centers in Hyderabad, Chennai, and Bangalore. After months of relentless effort and countless hospital visits, we finally arrived at Max Hospital in Saket, Delhi. There, we met Dr. Subash Gupta, the chairman of Liver and Biliary Sciences. He became our beacon of hope, initiating my father’s treatment and confirming that a liver transplant was his only chance of survival.</p>
-        <p class="text-base sm:text-lg mb-6 text-gray-600">The next challenge was finding a donor. My mother volunteered to donate her liver, but she failed the rigorous donor evaluation process. Desperate and heartbroken, my mother pleaded with family members to step forward, but no one agreed. It was then that I decided to take a stand. I told my mother, “I will donate my liver.” Initially, my parents were against the idea. My mother argued that I was too young, and my father couldn’t bear the thought of me undergoing such a procedure. But I was determined. After convincing them, I began the donor evaluation process, which involved six stages of comprehensive testing—from liver function tests, CT scans, and MRIs to psychological evaluations and interviews with the Transplant Health Organization (THO).</p>
-        <p class="text-base sm:text-lg mb-6 text-gray-600">One significant complication was that my blood group, AB+, did not match my father’s, which was B+. This required an ABO-incompatible liver transplantation (LT). To prepare for this, my father underwent immunosuppressive treatments to lower his antibody levels, and his body was closely monitored. This preparation took four long months. Finally, on the night of September 5, 2018, the parameters came into range. At around 2 a.m., I was informed that the operation theater was being prepped for my father’s transplant.</p>
-        <p class="text-base sm:text-lg mb-6 text-gray-600">By 5 a.m., nurses came to prepare me for surgery. I took a bath, and my mother tied my hair into a ponytail. I hugged my parents tightly, and soon, I was wheeled into the operation theater. As the donor, I went in first. The medical team kept me warm and began administering anesthesia. By 6:30 a.m., I was unconscious. My father was brought in shortly after, around 7 a.m. The surgeries were long and intense—mine lasted 16 hours, while my father’s took 20 hours.</p>
-        <p class="text-base sm:text-lg mb-6 text-gray-600">When I regained consciousness later that night, I saw Dr. Subash Gupta. My first question was, “How is my father?” With a reassuring smile, he patted my head and said, “The operation was successful.” Those words brought immense relief to my soul, and I drifted back into sleep, still under the effects of anesthesia.</p>
-        <p class="text-base sm:text-lg mb-6 text-gray-600">The days that followed were filled with recovery and healing. I stayed in the hospital for 16 days, while my father stayed for 25 days post-operation. Slowly but surely, we regained our strength. When we finally returned to our hometown, Prayagraj, it was with gratitude and renewed hope.</p>
-        <p class="text-base sm:text-lg mb-6 text-gray-600">People often say that cancer is unbeatable, but I believe that with faith in God, a skilled doctor like Dr. Subash Gupta, and the unwavering love of family, even the toughest battles can be won. This journey remains close to my heart, as it brings back memories of resilience, sacrifice, and love.</p>
-        <p class="text-base sm:text-lg mb-6 text-gray-600">Now, eight years later, my father continues to thrive, and I pray for his health and happiness every day. This experience has inspired me to start AMCARES, dedicated to helping families in similar situations, with the mission of saving as many lives as possible and ensuring that no one has to face such challenges alone.</p>
-        <p class="text-base sm:text-lg mb-6 text-gray-600">Thank you for reading my story. Join AMCARES’ mission to make a difference with AI-driven support.</p>
-        <p class="text-base sm:text-lg font-semibold text-gray-600">With gratitude,<br>Shreya Srivastava</p>
-        <button id="close-modal" class="mt-6 sm:mt-8 cta-button bg-blue-500 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-600" style="font-family: 'Montserrat', sans-serif;">Close</button>
       </div>
     </div>
+  </section>
 
-    <!-- Contact Us Section -->
-    <section id="contact" class="section py-16 sm:py-24 bg-white">
-      <div class="container mx-auto px-4">
-        <h2 class="text-4xl sm:text-5xl font-bold text-center mb-8 sm:mb-12" style="font-family: 'Montserrat', sans-serif; color: #1E3A8A;">Contact Us</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-12">
-          <div>
-            <h3 class="text-xl sm:text-2xl font-bold mb-4 sm:mb-6" style="font-family: 'Montserrat', sans-serif; color: #1E3A8A;">Get in Touch</h3>
-            <p class="text-base sm:text-lg text-gray-600 mb-4"><strong>Email:</strong> info@amcares.org</p>
-            <p class="text-base sm:text-lg text-gray-600 mb-4"><strong>Phone:</strong> +91 123-456-7890</p>
-            <p class="text-base sm:text-lg text-gray-600 mb-4"><strong>Address:</strong> 123 Hope Street, Prayagraj, India</p>
-            <div class="flex space-x-6">
-              <a href="https://facebook.com/amcares" target="_blank" class="hover:text-blue-600">
-                <svg class="w-6 sm:w-8 h-6 sm:h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg>
-              </a>
-              <a href="https://twitter.com/amcares" target="_blank" class="hover:text-blue-600">
-                <svg class="w-6 sm:w-8 h-6 sm:h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-              </a>
-            </div>
-          </div>
-          <form id="contact-form" class="bg-blue-50 p-6 sm:p-8 rounded-2xl shadow-xl">
-            <div class="mb-6">
-              <label for="contact-name" class="block text-base sm:text-lg font-medium text-gray-700" style="font-family: 'Montserrat', sans-serif;">Full Name</label>
-              <input type="text" id="contact-name" name="name" required class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-            </div>
-            <div class="mb-6">
-              <label for="contact-email" class="block text-base sm:text-lg font-medium text-gray-700" style="font-family: 'Montserrat', sans-serif;">Email Address</label>
-              <input type="email" id="contact-email" name="email" required class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
-            </div>
-            <div class="mb-6">
-              <label for="message" class="block text-base sm:text-lg font-medium text-gray-700" style="font-family: 'Montserrat', sans-serif;">Message</label>
-              <textarea id="message" name="message" required class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 h-24 sm:h-32"></textarea>
-              <p id="message-tip" class="text-sm text-gray-600 mt-2">AI Tip: Include your query type (e.g., donor info, event details).</p>
-            </div>
-            <button type="submit" class="w-full cta-button bg-blue-500 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-600" style="font-family: 'Montserrat', sans-serif;">Send Message</button>
-          </form>
+  <!-- Services Slide -->
+  <section id="services" class="slide bg-white">
+    <div class="container mx-auto px-4 text-center fade-in">
+      <h2 class="text-4xl font-bold font-montserrat mb-8 text-blue-900">Our Services</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        <div class="bg-blue-50 p-6 rounded-lg shadow-md hover-scale">
+          <h3 class="text-xl font-semibold mb-4 text-blue-900 font-montserrat">Primary Care</h3>
+          <p class="text-gray-600 font-inter">Comprehensive healthcare services for individuals and families, focusing on prevention, diagnosis, and treatment.</p>
+        </div>
+        <div class="bg-blue-50 p-6 rounded-lg shadow-md hover-scale">
+          <h3 class="text-xl font-semibold mb-4 text-blue-900 font-montserrat">Community Support</h3>
+          <p class="text-gray-600 font-inter">Programs to enhance mental health, nutrition, and social services, fostering a stronger community.</p>
+        </div>
+        <div class="bg-blue-50 p-6 rounded-lg shadow-md hover-scale">
+          <h3 class="text-xl font-semibold mb-4 text-blue-900 font-montserrat">Specialized Care</h3>
+          <p class="text-gray-600 font-inter">Personalized treatments and consultations for chronic conditions and specialized medical needs.</p>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
+
+  <!-- Contact Us Slide -->
+  <section id="contact" class="slide bg-blue-50">
+    <div class="container mx-auto px-4 text-center fade-in">
+      <h2 class="text-4xl font-bold font-montserrat mb-8 text-blue-900">Contact Us</h2>
+      <p class="text-lg text-gray-700 max-w-3xl mx-auto mb-6 font-inter">
+        Connect with us for inquiries, appointments, or to learn more about our healthtech solutions.
+      </p>
+      <div class="max-w-lg mx-auto bg-white p-6 rounded-lg shadow-lg hover-scale">
+        <div class="space-y-4 font-inter">
+          <p><strong>Email:</strong> <a href="mailto:info@amcares.org" class="text-blue-600 hover:underline">info@amcares.org</a></p>
+          <p><strong>Phone:</strong> (123) 456-7890</p>
+          <p><strong>Address:</strong> 123 Health St, Care City, USA</p>
+        </div>
+        <div class="mt-6">
+          <button onclick="alert('Thank you for your interest! Please email us at info@amcares.org.')" class="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold font-inter hover:bg-blue-700 hover-scale text-base">Send a Message</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Chatbot -->
+  <div class="chatbot-container">
+    <div class="chatbot-button" onclick="toggleChatbot()">
+      <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+      </svg>
+    </div>
+    <div class="chatbot-window" id="chatbotWindow">
+      <div class="chatbot-header">
+        <h3 class="text-lg font-bold font-montserrat">AM Cares Assistant</h3>
+        <p class="text-sm">Ask about AM Cares, our founder, or services!</p>
+      </div>
+      <div class="chatbot-messages" id="chatbotMessages">
+        <div class="bot-message">Hi! I'm the AM Cares Assistant. Ask me anything about AM Cares, our founder, or our services!</div>
+      </div>
+      <div class="chatbot-input">
+        <input type="text" id="chatInput" placeholder="Type your question..." class="font-inter">
+        <button onclick="sendMessage()">Submit</button>
+      </div>
+    </div>
   </div>
 
   <!-- Footer -->
-  <footer class="bg-blue-900 text-white py-8 sm:py-12 text-center">
-    <p class="text-base sm:text-lg mb-4">© 2025 AMCARES. All rights reserved. | <a href="#" class="underline hover:text-blue-300">Privacy Policy</a></p>
-    <div class="flex justify-center space-x-6">
-      <a href="https://facebook.com/amcares" target="_blank" class="hover:text-blue-300">
-        <svg class="w-6 sm:w-8 h-6 sm:h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg>
-      </a>
-      <a href="https://twitter.com/amcares" target="_blank" class="hover:text-blue-300">
-        <svg class="w-6 sm:w-8 h-6 sm:h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-      </a>
+  <footer class="bg-blue-900 text-white py-6">
+    <div class="container mx-auto text-center font-inter">
+      <p>© 2025 AM Cares. All rights reserved.</p>
     </div>
   </footer>
 
-  <!-- Chatbot -->
-  <div class="chatbot">
-    <button id="chatbot-toggle" class="chatbot-toggle bg-gradient-to-r from-blue-500 to-blue-700 text-white p-3 sm:p-4 rounded-full shadow-xl hover:from-blue-600 hover:to-blue-800 transition" aria-label="Toggle AI Chatbot">
-      <svg class="w-6 sm:w-8 h-6 sm:h-8" fill="currentColor" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 18H4V4h16v16zM8 16h8v2H8v-2zm0-4h8v2H8v-2zm0-4h8v2H8V8z"/></svg>
-    </button>
-    <div id="chatbot-window" class="hidden bg-gradient-to-b from-blue-50 to-white p-4 sm:p-6 rounded-2xl shadow-xl w-full sm:w-80 max-w-sm mt-2 chatbot-window">
-      <div class="flex justify-between items-center mb-4">
-        <h3 class="text-lg sm:text-xl font-bold" style="font-family: 'Montserrat', sans-serif; color: #1E3A8A;">AMCARES AI Assistant</h3>
-        <button id="chatbot-close" class="text-gray-600 hover:text-gray-800">
-          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M18.3 5.71a.996.996 0 0 0-1.41 0L12 10.59 7.11 5.7a.996.996 0 1 0-1.41 1.41L10.59 12l-4.89 4.89a.996.996 0 1 0 1.41 1.41L12 13.41l4.89 4.89a.996.996 0 1 0 1.41-1.41L13.41 12l4.89-4.89a.996.996 0 0 0 0-1.41z"/></svg>
-        </button>
-      </div>
-      <div id="chatbot-messages" class="h-64 overflow-y-auto mb-4 bg-white rounded-lg p-4 shadow-inner"></div>
-      <div class="relative">
-        <input id="chatbot-input" type="text" placeholder="Ask about AMCARES or speak..." class="w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 pr-10" aria-label="Chatbot Input">
-        <button id="voice-input" class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-600 hover:text-blue-600" aria-label="Voice Input">
-          <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.91-3c-.49 0-.9.36-.98.85C16.52 14.2 14.47 16 12 16s-4.52-1.8-4.93-4.15c-.08-.49-.49-.85-.98-.85-.61 0-1.09.54-1 1.14.49 2.84 2.76 5.01 5.91 5.01s5.42-2.17 5.91-5.01c.09-.6-.39-1.14-1-1.14z"/></svg>
-        </button>
-      </div>
-    </div>
-  </div>
-
+  <!-- Smooth Scroll, Animation, and Chatbot Script -->
   <script>
-    // Section visibility on scroll
-    const sections = document.querySelectorAll('.section');
-    const observer = new IntersectionObserver((entries) => {
+    // Smooth Scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+
+    // Fade-in Animation on Scroll
+    const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('visible');
@@ -450,277 +468,73 @@
       });
     }, { threshold: 0.1 });
 
-    sections.forEach(section => observer.observe(section));
-
-    // Navigation
-    const navLinks = document.querySelectorAll('.nav-link');
-    const hamburger = document.querySelector('.hamburger');
-    const navMenu = document.querySelector('.nav-links');
-
-    hamburger.addEventListener('click', () => {
-      navMenu.classList.toggle('active');
+    document.querySelectorAll('.fade-in').forEach(element => {
+      observer.observe(element);
     });
 
-    navLinks.forEach(link => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        const targetId = link.getAttribute('href')?.substring(1) || link.getAttribute('data-page');
-        if (targetId === 'story') {
-          storyModal.classList.add('active');
-        } else {
-          storyModal.classList.remove('active');
-          document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth' });
-        }
-        navMenu.classList.remove('active');
-      });
+    // Hamburger Menu Toggle
+    document.querySelector('.hamburger').addEventListener('click', () => {
+      document.querySelector('.nav-menu').classList.toggle('active');
     });
 
-    // Modal functionality
-    const storyModal = document.getElementById('story-modal');
-    const closeModal = document.getElementById('close-modal');
-    closeModal.addEventListener('click', () => {
-      storyModal.classList.remove('active');
-    });
-    storyModal.addEventListener('click', (e) => {
-      if (e.target === storyModal) {
-        storyModal.classList.remove('active');
-      }
-    });
-
-    // Carousel
-    const carouselItems = document.querySelectorAll('.carousel-item');
-    let currentSlide = 0;
-
-    function showSlide(index) {
-      carouselItems.forEach((item, i) => {
-        item.classList.toggle('active', i === index);
-      });
-    }
-
-    showSlide(currentSlide);
-
-    // Donor form submission with AI validation
-    document.getElementById('donor-form').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const bloodGroup = document.getElementById('blood-group').value;
-      const contactNumber = document.getElementById('contact-number').value;
-      if (!/^\d{10}$/.test(contactNumber)) {
-        alert('Please enter a valid 10-digit contact number.');
-        return;
-      }
-      alert(`Thank you for registering as a donor with AMCARES! AI Analysis: Your blood group (${bloodGroup}) is compatible with ${bloodGroup === 'O-' ? 'all recipients' : 'select recipients'}. We’ll contact you soon.`);
-      this.reset();
-      document.getElementById('blood-group-tip').textContent = 'AI Tip: O- is a universal donor for liver transplants.';
-    });
-
-    // Contact form submission with AI tip
-    document.getElementById('contact-form').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const message = document.getElementById('message').value.toLowerCase();
-      let aiTip = 'AI Tip: General inquiry received.';
-      if (message.includes('donor')) {
-        aiTip = 'AI Tip: Visit the Be a Donor section to register!';
-      } else if (message.includes('event')) {
-        aiTip = 'AI Tip: Check the Events section for upcoming programs!';
-      }
-      alert(`Thank you for contacting AMCARES! ${aiTip} We will respond soon.`);
-      this.reset();
-      document.getElementById('message-tip').textContent = 'AI Tip: Include your query type (e.g., donor info, event details).';
-    });
-
-    // Collapsible content
-    const collapsibles = document.querySelectorAll('.collapsible');
-    collapsibles.forEach(button => {
-      button.addEventListener('click', () => {
-        const content = button.nextElementSibling;
-        content.classList.toggle('active');
-      });
-    });
-
-    // Event countdown
-    function startCountdown(elementId, targetDate) {
-      const element = document.getElementById(elementId);
-      function updateCountdown() {
-        const now = new Date();
-        const timeLeft = new Date(targetDate) - now;
-        if (timeLeft <= 0) {
-          element.textContent = 'Event Started!';
-          return;
-        }
-        const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-        element.textContent = `${days}d ${hours}h ${minutes}m`;
-      }
-      updateCountdown();
-      setInterval(updateCountdown, 60000);
-    }
-
-    startCountdown('gala-countdown', '2025-06-15T18:00:00');
-    startCountdown('fair-countdown', '2025-07-20T10:00:00');
-
-    // Voice and audio features
-    const synth = window.speechSynthesis;
-    function readAloud(text, button) {
-      if (synth.speaking) {
-        synth.cancel();
-        button.textContent = 'Read Aloud';
-        return;
-      }
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = 'en-US';
-      utterance.rate = 1;
-      button.textContent = 'Stop Reading';
-      utterance.onend = () => {
-        button.textContent = 'Read Aloud';
-      };
-      synth.speak(utterance);
-    }
-
-    document.getElementById('about-read-aloud').addEventListener('click', function() {
-      const text = document.querySelector('#about .grid').textContent;
-      readAloud(text, this);
-    });
-
-    document.getElementById('doctors-read-aloud').addEventListener('click', function() {
-      const text = document.querySelector('#doctors .grid').textContent;
-      readAloud(text, this);
-    });
-
-    document.getElementById('programs-read-aloud').addEventListener('click', function() {
-      const text = document.querySelector('#programs .grid').textContent;
-      readAloud(text, this);
-    });
-
-    document.getElementById('mission-read-aloud').addEventListener('click', function() {
-      const text = document.querySelector('#mission .container').textContent;
-      readAloud(text, this);
-    });
-
-    document.getElementById('story-audio').addEventListener('click', function() {
-      const audio = new Audio('https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3'); // Placeholder
-      if (audio.paused) {
-        audio.play();
-        this.textContent = 'Pause Audio Narration';
-      } else {
-        audio.pause();
-        this.textContent = 'Play Audio Narration';
-      }
-    });
-
-    // AI-powered chatbot with voice input
-    const chatbotToggle = document.getElementById('chatbot-toggle');
-    const chatbotClose = document.getElementById('chatbot-close');
-    const chatbotWindow = document.getElementById('chatbot-window');
-    const chatbotInput = document.getElementById('chatbot-input');
-    const voiceInput = document.getElementById('voice-input');
-    const chatbotMessages = document.getElementById('chatbot-messages');
-
-    chatbotToggle.addEventListener('click', () => {
-      chatbotWindow.classList.toggle('hidden');
-      chatbotWindow.classList.toggle('active');
-    });
-
-    chatbotClose.addEventListener('click', () => {
-      chatbotWindow.classList.add('hidden');
-      chatbotWindow.classList.remove('active');
-    });
-
-    const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-    recognition.lang = 'en-US';
-    recognition.interimResults = false;
-
-    voiceInput.addEventListener('click', () => {
-      recognition.start();
-      voiceInput.classList.add('animate-pulse');
-    });
-
-    recognition.onresult = (event) => {
-      const transcript = event.results[0][0].transcript;
-      chatbotInput.value = transcript;
-      voiceInput.classList.remove('animate-pulse');
-      handleChatbotInput(transcript);
+    // Chatbot Functionality
+    const responses = {
+      "when was am cares founded": "AM Cares was founded in 2025.",
+      "who founded am cares": "AM Cares was founded by Shreya Srivastava.",
+      "who is the founder": "The founder of AM Cares is Shreya Srivastava.",
+      "tell me about the founder": "Shreya Srivastava is the founder of AM Cares, a software developer and passionate technical enthusiast. Her personal journey, particularly her experience donating her liver to save her father from liver cancer in 2018, inspired her to establish AM Cares in 2025. The organization focuses on supporting families facing organ transplant challenges, driven by her commitment to resilience, compassion, and healthcare equity.",
+      "about shreya srivastava": "Shreya Srivastava, the founder of AM Cares, is a software developer with a deep passion for technology and healthcare. Motivated by her own experience as a liver donor for her father in 2018, she founded AM Cares in 2025 to provide support and resources for organ transplant patients and their families, aiming to make healthcare accessible and equitable.",
+      "what does am cares do": "AM Cares is a healthtech organization dedicated to transforming healthcare delivery through innovation and compassion. It provides primary care, community support programs, and specialized care, with a focus on supporting organ transplants (liver, kidney, and heart). AM Cares collaborates with top specialists, like those from Max Hospital, to facilitate transplant processes, donor registration, and comprehensive care, aiming to enhance community well-being.",
+      "about liver transplant": "A liver transplant is a surgical procedure to replace a diseased liver with a healthy one from a living or deceased donor. AM Cares supports patients needing liver transplants by connecting them with top specialists, such as Dr. Subash Gupta from Max Hospital, and providing resources for pre- and post-transplant care, including immunosuppressive therapy and rehabilitation.",
+      "about kidney transplant": "A kidney transplant involves replacing a failed kidney with a healthy one from a living or deceased donor. AM Cares facilitates kidney transplant support by partnering with experts like Dr. Puneet Arora from Max Hospital, offering guidance on donor matching, pre-transplant evaluations, and post-operative care to ensure successful outcomes.",
+      "about heart transplant": "A heart transplant replaces a failing heart with a healthy one, typically from a deceased donor. AM Cares supports heart transplant patients by collaborating with specialists like Dr. Gaurav Gupta from Max Hospital, providing access to advanced procedures, including robotic-assisted surgeries, and comprehensive post-transplant care.",
+      "organ transplants": "AM Cares specializes in supporting liver, kidney, and heart transplants by connecting patients with leading specialists from Max Hospital, such as Dr. Subash Gupta (liver), Dr. Puneet Arora (kidney), and Dr. Gaurav Gupta (heart). Services include donor registration, pre-transplant evaluations, surgical coordination, and post-transplant care, including immunosuppressive therapy and rehabilitation.",
+      "services": "AM Cares offers primary care, community support programs (mental health, nutrition, social services), and specialized care, with a strong focus on organ transplants (liver, kidney, heart). It collaborates with Max Hospital specialists to provide comprehensive transplant support, donor registration, and post-operative care to enhance patient outcomes and community health."
     };
 
-    recognition.onerror = () => {
-      alert('Voice recognition failed. Please try again or type your question.');
-      voiceInput.classList.remove('animate-pulse');
-    };
+    function toggleChatbot() {
+      const chatbotWindow = document.getElementById('chatbotWindow');
+      chatbotWindow.style.display = chatbotWindow.style.display === 'block' ? 'none' : 'block';
+    }
 
-    recognition.onend = () => {
-      voiceInput.classList.remove('animate-pulse');
-    };
+    function sendMessage() {
+      const input = document.getElementById('chatInput');
+      const messages = document.getElementById('chatbotMessages');
+      const userMessage = input.value.trim().toLowerCase();
+      if (!userMessage) return;
 
-    chatbotInput.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter' && chatbotInput.value.trim()) {
-        handleChatbotInput(chatbotInput.value.trim());
+      // Add user message
+      const userDiv = document.createElement('div');
+      userDiv.className = 'user-message';
+      userDiv.textContent = input.value;
+      messages.appendChild(userDiv);
+
+      // Show typing indicator
+      const typingDiv = document.createElement('div');
+      typingDiv.className = 'typing-indicator';
+      typingDiv.innerHTML = 'AM Cares Assistant is typing<span>.</span><span>.</span><span>.</span>';
+      messages.appendChild(typingDiv);
+      messages.scrollTop = messages.scrollHeight;
+
+      // Simulate bot response delay
+      setTimeout(() => {
+        messages.removeChild(typingDiv);
+        const botDiv = document.createElement('div');
+        botDiv.className = 'bot-message';
+        botDiv.textContent = responses[userMessage] || "I'm sorry, I don't have information on that. Please ask about AM Cares, our founder, or our services!";
+        messages.appendChild(botDiv);
+        messages.scrollTop = messages.scrollHeight;
+      }, 1000);
+
+      input.value = '';
+    }
+
+    // Allow Enter key to send message
+    document.getElementById('chatInput').addEventListener('keypress', function (e) {
+      if (e.key === 'Enter') {
+        sendMessage();
       }
     });
-
-    function handleChatbotInput(userMessage) {
-      const messageDiv = document.createElement('div');
-      messageDiv.className = 'text-sm text-gray-700 mb-2';
-      messageDiv.textContent = `You: ${userMessage}`;
-      chatbotMessages.appendChild(messageDiv);
-
-      const userMessageLower = userMessage.toLowerCase();
-      let response = 'I’m your AI assistant! Can you clarify or ask another question?';
-      if (userMessageLower.includes('liver transplant')) {
-        response = 'Liver transplants replace a diseased liver with a healthy one, often requiring blood group compatibility. AMCARES uses AI to optimize donor matching and provide counseling. Register in the Be a Donor section!';
-      } else if (userMessageLower.includes('organ donation') || userMessageLower.includes('donor')) {
-        response = 'Organ donation saves lives! AMCARES supports donors with AI-guided registration and education. Visit the Be a Donor section to sign up. Want to know about blood group compatibility?';
-      } else if (userMessageLower.includes('shreya') || userMessageLower.includes('founder')) {
-        response = 'Shreya Srivastava founded AMCARES in 2018 after her father’s liver transplant. Her story inspires our AI-driven mission. Click Our Story to read more!';
-      } else if (userMessageLower.includes('amcares') || userMessageLower.includes('mission')) {
-        response = 'AMCARES leverages AI to support liver transplant patients with resources, education, and advocacy. Join our mission in the Be a Donor section!';
-      } else if (userMessageLower.includes('doctor') || userMessageLower.includes('doctors')) {
-        response = 'Our doctors, like Dr. Subash Gupta, use AI to enhance liver transplant outcomes. Learn more in the About Doctors section!';
-      } else if (userMessageLower.includes('event') || userMessageLower.includes('events')) {
-        response = 'AMCARES hosts AI-enhanced events like the Liver Health Awareness Gala (June 15, 2025). Check the Events section for details and RSVP!';
-      }
-
-      const botMessageDiv = document.createElement('div');
-      botMessageDiv.className = 'text-sm text-blue-600 mb-2';
-      botMessageDiv.textContent = `AI Assistant: ${response}`;
-      chatbotMessages.appendChild(botMessageDiv);
-      chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
-      chatbotInput.value = '';
-    }
-
-    // Simulate dynamic AI-driven content loading
-    async function loadDynamicContent() {
-      const eventList = document.getElementById('event-list');
-      const eventInsight = document.getElementById('event-insight');
-      const events = [
-        { title: 'Liver Health Awareness Gala', date: 'June 15, 2025', desc: 'Join us for an evening of AI-enhanced education and fundraising.', details: 'Location: Grand Hotel, Delhi. RSVP by June 1.' },
-        { title: 'Community Health Fair', date: 'July 20, 2025', desc: 'Free AI-powered health screenings and transplant education.', details: 'Location: Prayagraj Community Center. Open to all.' }
-      ];
-      eventInsight.textContent = `AI Insight: ${events.length} events scheduled, predicting 500+ attendees based on historical data.`;
-
-      eventList.innerHTML = events.map(event => `
-        <div class="bg-blue-50 p-6 sm:p-8 rounded-2xl shadow-xl card">
-          <h3 class="text-xl sm:text-2xl font-bold mb-4" style="font-family: 'Montserrat', sans-serif; color: #1E3A8A;">${event.title}</h3>
-          <p class="text-sm text-gray-600">Date: ${event.date}</p>
-          <p class="text-gray-600 mb-4">${event.desc}</p>
-          <p class="text-sm text-gray-600">Time left: <span id="${event.title.toLowerCase().replace(/\s/g, '-')}-countdown"></span></p>
-          <button class="collapsible text-blue-600 hover:underline mt-4">Details</button>
-          <div class="collapsible-content">${event.details}</div>
-        </div>
-      `).join('');
-
-      document.querySelectorAll('.collapsible').forEach(button => {
-        button.addEventListener('click', () => {
-          const content = button.nextElementSibling;
-          content.classList.toggle('active');
-        });
-      });
-    }
-
-    window.onload = () => {
-      loadDynamicContent();
-      startCountdown('liver-health-awareness-gala-countdown', '2025-06-15T18:00:00');
-      startCountdown('community-health-fair-countdown', '2025-07-20T10:00:00');
-    };
   </script>
 </body>
 </html>
