@@ -3,231 +3,1368 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AMCARES - Awareness and Medical Care for Organ Recipients and Supporters</title>
-  <script src="https://cdn.tailwindcss.com"></script> 
+  <title>AMCARES - HealthTech for Organ Donation Awareness</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Lora:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
-    body { font-family: 'Arial', sans-serif; }
-    .hero-bg { background-image: url('https://images.unsplash.com/photo-1576091160550-2173fdabea48?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80'); }
-    /* Custom Color Palette */
-    :root {
-      --primary-red: #EF4444; /* Vibrant red for life and urgency */
-      --secondary-yellow: #FBBF24; /* Warm yellow for hope and optimism */
-      --accent-blue: #3B82F6; /* Trustworthy blue for reliability */
-      --light-pink: #FFE4E6; /* Soft pink for compassion and care */
-      --dark-gray: #1F2937; /* Dark gray for text and contrast */
-      --off-white: #FFF7ED; /* Warm off-white for backgrounds */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      scroll-behavior: smooth;
     }
-    .navbar-bg { background-color: var(--accent-blue); }
-    .hero-overlay { background-color: rgba(0, 0, 0, 0.6); }
-    .section-bg-light { background-color: var(--off-white); }
-    .section-bg-pink { background-color: var(--light-pink); }
-    .text-primary { color: var(--primary-red); }
-    .text-secondary { color: var(--secondary-yellow); }
-    .text-accent { color: var(--accent-blue); }
-    .bg-primary { background-color: var(--primary-red); }
-    .bg-secondary { background-color: var(--secondary-yellow); }
-    .bg-accent { background-color: var(--accent-blue); }
-    .hover\:bg-primary-dark:hover { background-color: #DC2626; }
-    .hover\:bg-secondary-dark:hover { background-color: #F59E0B; }
-    .hover\:bg-accent-dark:hover { background-color: #2563EB; }
-    .icon-primary { color: var(--primary-red); }
-    .icon-secondary { color: var(--secondary-yellow); }
-    .icon-accent { color: var(--accent-blue); }
+    body {
+      font-family: 'Lora', serif;
+      color: #333;
+      background-color: #F8FAFC;
+      overflow-x: hidden;
+    }
+    h1, h2, h3 {
+      font-family: 'Poppins', sans-serif;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    }
+    /* Color Palette */
+    :root {
+      --deep-sapphire: #1E3A8A;
+      --teal-glow: #2DD4BF;
+      --soft-lavender: #EDE9FE;
+      --golden-amber: #FBBF24;
+      --white: #FFFFFF;
+      --light-gray: #E5E7EB;
+    }
+    /* Navbar */
+    .navbar {
+      background: linear-gradient(90deg, var(--deep-sapphire), #3B82F6);
+      padding: 1.5rem 0;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+    .navbar .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    .navbar .logo {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 1.8rem;
+      letter-spacing: 1px;
+      transition: color 0.3s ease;
+    }
+    .navbar .logo:hover {
+      color: var(--golden-amber);
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+    }
+    .nav-links a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: 600;
+      margin-left: 1.5rem;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+    }
+    .nav-links a:hover {
+      color: var(--golden-amber);
+      transform: scale(1.05);
+    }
+    .nav-links .story-link {
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    .nav-links .story-link:hover {
+      background: var(--teal-glow);
+      color: var(--deep-sapphire);
+      box-shadow: 0 4px 15px rgba(45, 212, 191, 0.4);
+    }
+    .hamburger {
+      display: none;
+      font-size: 1.8rem;
+      color: var(--white);
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+    .hamburger:hover {
+      color: var(--golden-amber);
+    }
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background: var(--deep-sapphire);
+        padding: 1rem 0;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+      }
+      .nav-links.active {
+        display: flex;
+      }
+      .nav-links a {
+        margin: 0.5rem 0;
+        text-align: center;
+      }
+      .hamburger {
+        display: block;
+      }
+    }
+    /* Modal for My Story */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 2000;
+      justify-content: center;
+      align-items: center;
+    }
+    .modal-content {
+      background: var(--white);
+      max-width: 90%;
+      width: 800px;
+      margin: 20px;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+      position: relative;
+      max-height: 80vh;
+      overflow-y: auto;
+      animation: slideIn 0.5s ease-in-out;
+      backdrop-filter: blur(10px);
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .modal-content h2 {
+      font-size: 2rem;
+      color: var(--deep-sapphire);
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+    .modal-content p {
+      margin-bottom: 1rem;
+      line-height: 1.8;
+      color: #4A5568;
+      font-size: 1.1rem;
+    }
+    .close-btn {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      font-size: 1.5rem;
+      color: var(--deep-sapphire);
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+    .close-btn:hover {
+      color: var(--teal-glow);
+    }
+    @media (max-width: 768px) {
+      .modal-content {
+        max-width: 95%;
+        padding: 1.5rem;
+      }
+      .modal-content h2 {
+        font-size: 1.5rem;
+      }
+      .modal-content p {
+        font-size: 0.95rem;
+      }
+    }
+    /* Hero Section with Parallax and Particle Animation */
+    .hero {
+      height: 100vh;
+      background: linear-gradient(rgba(30, 58, 138, 0.8), rgba(59, 130, 246, 0.8)), 
+                  url('https://images.unsplash.com/photo-1576091160399-1e3b2d54a36c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://www.transparenttextures.com/patterns/wave.png');
+      opacity: 0.05;
+      z-index: 0;
+    }
+    .particles {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+    .particle {
+      position: absolute;
+      background: rgba(251, 191, 36, 0.5);
+      border-radius: 50%;
+      animation: float 10s infinite ease-in-out;
+    }
+    @keyframes float {
+      0% { transform: translateY(0); opacity: 0.5; }
+      50% { transform: translateY(-100vh); opacity: 0.2; }
+      100% { transform: translateY(0); opacity: 0.5; }
+    }
+    .hero-content {
+      animation: fadeIn 1.5s ease-in-out;
+      z-index: 1;
+    }
+    .hero h1 {
+      font-size: 4.5rem;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.4);
+      letter-spacing: 1px;
+    }
+    .heartbeat {
+      width: 60px;
+      height: 4px;
+      background: var(--golden-amber);
+      position: relative;
+      display: inline-block;
+    }
+    .heartbeat::before, .heartbeat::after {
+      content: '';
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      background: var(--golden-amber);
+      border-radius: 50%;
+      top: -4px;
+      animation: pulse 1.5s infinite ease-in-out;
+    }
+    .heartbeat::before { left: 15px; }
+    .heartbeat::after { right: 15px; animation-delay: 0.3s; }
+    .hero p {
+      font-size: 1.6rem;
+      margin-bottom: 2.5rem;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+      font-style: italic;
+    }
+    .btn {
+      background: var(--teal-glow);
+      color: var(--deep-sapphire);
+      padding: 1.2rem 3rem;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.2rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 5px 15px rgba(45, 212, 191, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    .btn.visible {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 8px 20px rgba(45, 212, 191, 0.6);
+    }
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.8rem;
+      }
+      .hero p {
+        font-size: 1.2rem;
+        max-width: 90%;
+      }
+      .btn {
+        padding: 0.8rem 2rem;
+        font-size: 1rem;
+      }
+    }
+    /* About Section */
+    .about {
+      padding: 7rem 0;
+      background: linear-gradient(135deg, var(--soft-lavender), var(--white));
+      position: relative;
+    }
+    .about::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://www.transparenttextures.com/patterns/wave.png');
+      opacity: 0.03;
+      z-index: 0;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      position: relative;
+    }
+    .about h2 {
+      font-size: 3.5rem;
+      color: var(--deep-sapphire);
+      text-align: center;
+      margin-bottom: 3rem;
+      position: relative;
+      transform: none;
+      display: inline-block;
+    }
+    .about h2::after {
+      content: '';
+      width: 80px;
+      height: 5px;
+      background: var(--teal-glow);
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 5px;
+      animation: underline 2s infinite ease-in-out;
+    }
+    @keyframes underline {
+      0% { width: 80px; }
+      50% { width: 120px; }
+      100% { width: 80px; }
+    }
+    .about-content {
+      margin-bottom: 3rem;
+      animation: fadeIn 1s ease-in-out;
+    }
+    .about-text {
+      width: 100%;
+    }
+    .about-text p {
+      margin-bottom: 1.2rem;
+      line-height: 1.9;
+      color: #4A5568;
+      font-size: 1.1rem;
+    }
+    .about-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    .stat-card {
+      background: var(--white);
+      padding: 2rem;
+      border-radius: 15px;
+      text-align: center;
+      box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1), -5px -5px 15px rgba(255, 255, 255, 0.8);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    .stat-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .stat-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 8px 8px 20px rgba(45, 212, 191, 0.3), -8px -8px 20px rgba(255, 255, 255, 0.9);
+    }
+    .stat-card h3 {
+      font-size: 2.8rem;
+      color: var(--deep-sapphire);
+      margin-bottom: 0.5rem;
+    }
+    .stat-card p {
+      color: #718096;
+      font-size: 1.1rem;
+    }
+    @media (max-width: 768px) {
+      .about {
+        padding: 4rem 0;
+      }
+      .about h2 {
+        font-size: 2.2rem;
+      }
+      .about-text p {
+        font-size: 1rem;
+      }
+      .stat-card h3 {
+        font-size: 2rem;
+      }
+      .stat-card p {
+        font-size: 0.9rem;
+      }
+    }
+    /* Pledge Section */
+    .pledge {
+      padding: 7rem 0;
+      background: var(--white);
+      position: relative;
+    }
+    .pledge::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://www.transparenttextures.com/patterns/wave.png');
+      opacity: 0.03;
+      z-index: 0;
+    }
+    .pledge h2 {
+      font-size: 3.5rem;
+      color: var(--deep-sapphire);
+      text-align: center;
+      margin-bottom: 1rem;
+      transform: none;
+      position: relative;
+    }
+    .pledge h2::after {
+      content: '';
+      width: 80px;
+      height: 5px;
+      background: var(--teal-glow);
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 5px;
+      animation: underline 2s infinite ease-in-out;
+    }
+    .pledge p {
+      text-align: center;
+      max-width: 700px;
+      margin: 0 auto 2rem;
+      color: #4A5568;
+      font-size: 1.2rem;
+      font-style: italic;
+    }
+    .pledge-form {
+      max-width: 600px;
+      margin: 0 auto;
+      background: var(--light-gray);
+      padding: 2.5rem;
+      border-radius: 20px;
+      box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1), -5px -5px 15px rgba(255, 255, 255, 0.8);
+      transition: transform 0.3s ease;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    .pledge-form.visible {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .pledge-form:hover {
+      transform: translateY(-5px);
+    }
+    .pledge-form label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: var(--deep-sapphire);
+    }
+    .pledge-form input,
+    .pledge-form select {
+      width: 100%;
+      padding: 0.75rem;
+      margin-bottom: 1.5rem;
+      border: 1px solid #CBD5E0;
+      border-radius: 8px;
+      font-size: 1rem;
+      transition: border 0.3s ease, box-shadow 0.3s ease;
+      font-family: 'Lora', serif;
+    }
+    .pledge-form input:focus,
+    .pledge-form select:focus {
+      outline: none;
+      border-color: var(--teal-glow);
+      box-shadow: 0 0 5px rgba(45, 212, 191, 0.3);
+    }
+    .pledge-form button {
+      width: 100%;
+      background: var(--teal-glow);
+      color: var(--deep-sapphire);
+      padding: 1rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 5px 15px rgba(45, 212, 191, 0.4);
+    }
+    .pledge-form button:hover {
+      background: #26BCA9;
+      transform: scale(1.02);
+      box-shadow: 0 8px 20px rgba(45, 212, 191, 0.6);
+    }
+    .pledge-message {
+      text-align: center;
+      margin-top: 1.5rem;
+      color: var(--teal-glow);
+      font-weight: 600;
+      font-size: 1.1rem;
+      display: none;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+    @media (max-width: 768px) {
+      .pledge {
+        padding: 4rem 0;
+      }
+      .pledge h2 {
+        font-size: 2.2rem;
+      }
+      .pledge p {
+        font-size: 1rem;
+        max-width: 90%;
+      }
+      .pledge-form {
+        padding: 1.5rem;
+      }
+      .pledge-form input,
+      .pledge-form select,
+      .pledge-form button {
+        font-size: 0.9rem;
+      }
+    }
+    /* Resources Section */
+    .resources {
+      padding: 7rem 0;
+      background: linear-gradient(135deg, var(--white), var(--soft-lavender));
+      position: relative;
+    }
+    .resources::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://www.transparenttextures.com/patterns/wave.png');
+      opacity: 0.03;
+      z-index: 0;
+    }
+    .resources h2 {
+      font-size: 3.5rem;
+      color: var(--deep-sapphire);
+      text-align: center;
+      margin-bottom: 3rem;
+      transform: none;
+      position: relative;
+    }
+    .resources h2::after {
+      content: '';
+      width: 80px;
+      height: 5px;
+      background: var(--teal-glow);
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 5px;
+      animation: underline 2s infinite ease-in-out;
+    }
+    .resources-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+    .resource-card {
+      background: var(--white);
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1), -5px -5px 15px rgba(255, 255, 255, 0.8);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    .resource-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .resource-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 8px 8px 20px rgba(45, 212, 191, 0.3), -8px -8px 20px rgba(255, 255, 255, 0.9);
+    }
+    .resource-card h3 {
+      font-size: 1.8rem;
+      color: var(--deep-sapphire);
+      margin-bottom: 1rem;
+    }
+    .resource-card p {
+      color: #718096;
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+    .resource-card a {
+      color: var(--teal-glow);
+      font-weight: 600;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    .resource-card a:hover {
+      color: var(--golden-amber);
+    }
+    @media (max-width: 768px) {
+      .resources {
+        padding: 4rem 0;
+      }
+      .resources h2 {
+        font-size: 2.2rem;
+      }
+      .resource-card h3 {
+        font-size: 1.5rem;
+      }
+      .resource-card p {
+        font-size: 0.9rem;
+      }
+    }
+    /* Support Section */
+    .support {
+      padding: 7rem 0;
+      background: var(--white);
+      position: relative;
+    }
+    .support::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://www.transparenttextures.com/patterns/wave.png');
+      opacity: 0.03;
+      z-index: 0;
+    }
+    .support h2 {
+      font-size: 3.5rem;
+      color: var(--deep-sapphire);
+      text-align: center;
+      margin-bottom: 3rem;
+      transform: none;
+      position: relative;
+    }
+    .support h2::after {
+      content: '';
+      width: 80px;
+      height: 5px;
+      background: var(--teal-glow);
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 5px;
+      animation: underline 2s infinite ease-in-out;
+    }
+    .support-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      text-align: center;
+    }
+    .support-card {
+      padding: 2rem;
+      background: var(--light-gray);
+      border-radius: 15px;
+      box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.1), -5px -5px 15px rgba(255, 255, 255, 0.8);
+      transition: transform 0.3s ease;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    .support-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .support-card:hover {
+      transform: translateY(-5px);
+    }
+    .support-card i {
+      font-size: 3rem;
+      color: var(--teal-glow);
+      margin-bottom: 1rem;
+      animation: iconPulse 2s infinite ease-in-out;
+    }
+    @keyframes iconPulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+    .support-card h3 {
+      font-size: 1.8rem;
+      color: var(--deep-sapphire);
+      margin-bottom: 0.5rem;
+    }
+    .support-card p {
+      color: #718096;
+      font-size: 1.1rem;
+    }
+    @media (max-width: 768px) {
+      .support {
+        padding: 4rem 0;
+      }
+      .support h2 {
+        font-size: 2.2rem;
+ architectural: 1.5rem;
+      }
+      .support-card p {
+        font-size: 0.9rem;
+      }
+    }
+    /* Donate Section */
+    .donate {
+      padding: 7rem 0;
+      background: linear-gradient(135deg, var(--soft-lavender), var(--white));
+      text-align: center;
+      position: relative;
+    }
+    .donate::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://www.transparenttextures.com/patterns/wave.png');
+      opacity: 0.03;
+      z-index: 0;
+    }
+    .donate h2 {
+      font-size: 3.5rem;
+      color: var(--deep-sapphire);
+      margin-bottom: 1rem;
+      transform: none;
+      position: relative;
+    }
+    .donate h2::after {
+      content: '';
+      width: 80px;
+      height: 5px;
+      background: var(--teal-glow);
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 5px;
+      animation: underline 2s infinite ease-in-out;
+    }
+    .donate p {
+      max-width: 700px;
+      margin: 0 auto 2rem;
+      color: #4A5568;
+      font-size: 1.2rem;
+      font-style: italic;
+    }
+    @media (max-width: 768px) {
+      .donate {
+        padding: 4rem 0;
+      }
+      .donate h2 {
+        font-size: 2.2rem;
+      }
+      .donate p {
+        font-size: 1rem;
+        max-width: 90%;
+      }
+    }
+    /* Contact Section */
+    .contact {
+      padding: 7rem 0;
+      background: var(--white);
+      text-align: center;
+      position: relative;
+    }
+    .contact::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: url('https://www.transparenttextures.com/patterns/wave.png');
+      opacity: 0.03;
+      z-index: 0;
+    }
+    .contact h2 {
+      font-size: 3.5rem;
+      color: var(--deep-sapphire);
+      margin-bottom: 1rem;
+      transform: none;
+      position: relative;
+    }
+    .contact h2::after {
+      content: '';
+      width: 80px;
+      height: 5px;
+      background: var(--teal-glow);
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      border-radius: 5px;
+      animation: underline 2s infinite ease-in-out;
+    }
+    .contact p {
+      max-width: 700px;
+      margin: 0 auto 2rem;
+      color: #4A5568;
+      font-size: 1.2rem;
+      font-style: italic;
+    }
+    .contact-details p {
+      margin-bottom: 1.5rem;
+      font-size: 1.2rem;
+      color: #4A5568;
+    }
+    .contact-details i {
+      color: var(--teal-glow);
+      margin-right: 0.75rem;
+      font-size: 1.3rem;
+    }
+    @media (max-width: 768px) {
+      .contact {
+        padding: 4rem 0;
+      }
+      .contact h2 {
+        font-size: 2.2rem;
+      }
+      .contact p {
+        font-size: 1rem;
+        max-width: 90%;
+      }
+      .contact-details p {
+        font-size: 1rem;
+      }
+    }
+    /* Footer */
+    .footer {
+      background: linear-gradient(90deg, var(--deep-sapphire), #3B82F6);
+      padding: 4rem 0;
+      color: var(--white);
+      text-align: center;
+    }
+    .footer p {
+      margin-bottom: 1.5rem;
+      font-size: 1.1rem;
+    }
+    .footer a {
+      color: var(--golden-amber);
+      margin: 0 1.5rem;
+      font-size: 1.8rem;
+      transition: color 0.3s ease, transform 0.3s ease;
+    }
+    .footer a:hover {
+      color: var(--teal-glow);
+      transform: scale(1.2);
+    }
+    @media (max-width: 768px) {
+      .footer {
+        padding: 3rem 0;
+      }
+      .footer p {
+        font-size: 0.9rem;
+      }
+      .footer a {
+        font-size: 1.5rem;
+        margin: 0 1rem;
+      }
+    }
+    /* Back to Top Button */
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: var(--teal-glow);
+      color: var(--deep-sapphire);
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      box-shadow: 0 5px 15px rgba(45, 212, 191, 0.4);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      opacity: 0;
+      visibility: hidden;
+      z-index: 1000;
+    }
+    .back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+    .back-to-top:hover {
+      transform: scale(1.1);
+      box-shadow: 0 8px 20px rgba(45, 212, 191, 0.6);
+    }
+    @media (max-width: 768px) {
+      .back-to-top {
+        width: 40px;
+        height: 40px;
+        font-size: 1.2rem;
+        bottom: 20px;
+        right: 20px;
+      }
+    }
+    /* Chatbot Styles */
+    .chatbot {
+      position: fixed;
+      bottom: 30px;
+      right: 100px;
+      z-index: 1000;
+    }
+    .chatbot-btn {
+      background: var(--teal-glow);
+      color: var(--deep-sapphire);
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      box-shadow: 0 5px 15px rgba(45, 212, 191, 0.4);
+      cursor: pointer;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .chatbot-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 8px 20px rgba(45, 212, 191, 0.6);
+    }
+    .chatbot-window {
+      display: none;
+      position: absolute;
+      bottom: 80px;
+      right: 0;
+      width: 350px;
+      height: 450px;
+      background: var(--white);
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+      flex-direction: column;
+      border: 1px solid var(--teal-glow);
+    }
+    .chatbot-header {
+      background: linear-gradient(90deg, var(--deep-sapphire), #3B82F6);
+      color: var(--white);
+      padding: 1rem;
+      border-top-left-radius: 15px;
+      border-top-right-radius: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .chatbot-header h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      text-shadow: none;
+    }
+    .chatbot-header .close-chat {
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+    .chatbot-header .close-chat:hover {
+      color: var(--golden-amber);
+    }
+    .chatbot-body {
+      flex: 1;
+      padding: 1rem;
+      overflow-y: auto;
+      background: var(--soft-lavender);
+    }
+    .chat-message {
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: flex-start;
+    }
+    .chat-message.bot {
+      justify-content: flex-start;
+    }
+    .chat-message.user {
+      justify-content: flex-end;
+    }
+    .chat-message .message {
+      max-width: 80%;
+      padding: 0.75rem;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+    .chat-message.bot .message {
+      background: var(--white);
+      color: var(--deep-sapphire);
+      border: 1px solid var(--teal-glow);
+    }
+    .chat-message.user .message {
+      background: var(--teal-glow);
+      color: var(--deep-sapphire);
+      border: 1px solid var(--deep-sapphire);
+    }
+    .chatbot-footer {
+      padding: 1rem;
+      border-top: 1px solid var(--light-gray);
+      display: flex;
+      align-items: center;
+      background: var(--white);
+      border-bottom-left-radius: 15px;
+      border-bottom-right-radius: 15px;
+    }
+    .chatbot-footer input {
+      flex: 1;
+      padding: 0.75rem;
+      border: 1px solid var(--light-gray);
+      border-radius: 20px;
+      font-size: 0.95rem;
+      margin-right: 0.5rem;
+      font-family: 'Lora', serif;
+    }
+    .chatbot-footer input:focus {
+      outline: none;
+      border-color: var(--teal-glow);
+      box-shadow: 0 0 5px rgba(45, 212, 191, 0.3);
+    }
+    .chatbot-footer button {
+      background: var(--teal-glow);
+      color: var(--deep-sapphire);
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .chatbot-footer button:hover {
+      background: #26BCA9;
+    }
+    @media (max-width: 768px) {
+      .chatbot {
+        bottom: 20px;
+        right: 20px;
+      }
+      .chatbot-btn {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+      }
+      .chatbot-window {
+        width: 300px;
+        height: 400px;
+        bottom: 70px;
+      }
+      .chatbot-header h3 {
+        font-size: 1rem;
+      }
+      .chat-message .message {
+        font-size: 0.85rem;
+      }
+      .chatbot-footer input {
+        font-size: 0.85rem;
+      }
+    }
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.3); }
+      100% { transform: scale(1); }
+    }
   </style>
 </head>
-<body class="bg-gray-100">
+<body>
   <!-- Navbar -->
-  <nav class="navbar-bg text-white p-4 sticky top-0 z-10">
-    <div class="container mx-auto flex justify-between items-center">
-      <a href="/" class="text-2xl font-bold">AMCARES HEALTH ORGANIZATION</a>
-      <div class="space-x-4">
-        <a href="#home" class="hover:text-secondary">Home</a>
-        <a href="#about" class="hover:text-secondary">About</a>
-        <a href="#pledge" class="hover:text-secondary">Pledge to Donate</a>
-        <a href="#resources" class="hover:text-secondary">Resources</a>
-        <a href="#support" class="hover:text-secondary">Support</a>
-        <a href="#donate" class="hover:text-secondary">Donate</a>
-        <a href="#contact" class="hover:text-secondary">Contact</a>
+  <nav class="navbar">
+    <div class="container">
+      <a href="/" class="logo">AMCARES Health Organization</a>
+      <div class="hamburger" onclick="toggleMenu()">
+        <i class="fas fa-bars"></i>
+      </div>
+      <div class="nav-links" id="nav-links">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#pledge">Pledge to Donate</a>
+        <a href="#resources">Resources</a>
+        <a href="#support">Support</a>
+        <a href="#donate">Donate</a>
+        <a href="#contact">Contact</a>
+        <a href="#" class="story-link" onclick="openModal()">My Story</a>
       </div>
     </div>
   </nav>
 
+  <!-- Modal for My Story -->
+  <div id="story-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal()">×</span>
+      <h2>My Story: A Journey of Resilience and Love</h2>
+      <p>My name is Shreya Srivastava, and I currently work as a software developer. Beyond my professional life, I am a passionate technical enthusiast, but today, I want to share a deeply personal and emotional journey that has shaped who I am. This is a story of a significant challenge that tested my family’s strength and faith.</p>
+      <p>The story begins on May 21, 2018. It was my parents’ anniversary, and we were celebrating together, filled with happiness and joy. The day was beautiful, but little did we know that our lives were about to change drastically. The very next day, my father fell seriously ill. We rushed him to a hospital in Prayagraj, where the doctors diagnosed him with liver cirrhosis and confirmed that water had accumulated in his liver. His treatment began immediately. For five days, the doctors worked tirelessly, draining the fluid from his liver using injections. However, after those five days, the doctors informed us that his condition was critical and referred us to another hospital for further treatment.</p>
+      <p>Our next stop was PGI Lucknow, where we received devastating news—my father was diagnosed with liver cancer. The doctors explained that the only way to save him was through a liver transplant. In that moment, our world came crashing down. The thought of losing my father within six months, as predicted by the doctors, was unbearable. As the eldest daughter, I knew I had to stay strong for my family, even though I was only 17 years old at the time. While everyone else was consumed by grief, I held onto my faith and trusted God’s plan.</p>
+      <p>Determined to fight for my father’s life, I began searching for the best liver surgeon in India. We traveled far and wide, visiting renowned hospitals like Gangaram Hospital, Medanta, Apollo, and centers in Hyderabad, Chennai, and Bangalore. After months of relentless effort and countless hospital visits, we finally arrived at Max Hospital in Saket, Delhi. There, we met Dr. Subash Gupta, the chairman of Liver and Biliary Sciences. He became our beacon of hope, initiating my father’s treatment and confirming that a liver transplant was his only chance of survival.</p>
+      <p>The next challenge was finding a donor. My mother volunteered to donate her liver, but she failed the rigorous donor evaluation process. Desperate and heartbroken, my mother pleaded with family members to step forward, but no one agreed. It was then that I decided to take a stand. I told my mother, “I will donate my liver.” Initially, my parents were against the idea. My mother argued that I was too young, and my father couldn’t bear the thought of me undergoing such a procedure. But I was determined. After convincing them, I began the donor evaluation process, which involved six stages of comprehensive testing—from liver function tests, CT scans, and MRIs to psychological evaluations and interviews with the Transplant Health Organization (THO).</p>
+      <p>One significant complication was that my blood group, AB+, did not match my father’s, which was B+. This required an ABO-incompatible liver transplantation (LT). To prepare for this, my father underwent immunosuppressive treatments to lower his antibody levels, and his body was closely monitored. This preparation took four long months. Finally, on the night of September 5, 2018, the parameters came into range. At around 2 a.m., I was informed that the operation theater was being prepped for my father’s transplant.</p>
+      <p>By 5 a.m., nurses came to prepare me for surgery. I took a bath, and my mother tied my hair into a ponytail. I hugged my parents tightly, and soon, I was wheeled into the operation theater. As the donor, I went in first. The medical team kept me warm and began administering anesthesia. By 6:30 a.m., I was unconscious. My father was brought in shortly after, around 7 a.m. The surgeries were long and intense—mine lasted 16 hours, while my father’s took 20 hours.</p>
+      <p>When I regained consciousness later that night, I saw Dr. Subash Gupta. My first question was, “How is my father?” With a reassuring smile, he patted my head and said, “The operation was successful.” Those words brought immense relief to my soul, and I drifted back into sleep, still under the feel of anesthesia.</p>
+      <p>The days that followed were filled with recovery and healing. I stayed in the hospital for 16 days, while my father stayed for 25 days post-operation. Slowly but surely, we regained our strength. When we finally returned to our hometown, Prayagraj, it was with gratitude and renewed hope.</p>
+      <p>People often say that cancer is unbeatable, but I believe that with faith in God, a skilled doctor like Dr. Subash Gupta, and the unwavering love of family, even the toughest battles can be won. This journey remains close to my heart, as it brings back memories of resilience, sacrifice, and love.</p>
+      <p>Now, eight years later, my father continues to thrive, and I pray for his health and happiness every day. This experience has inspired me to start an organization dedicated to helping families in similar situations, with the mission of saving as many lives as possible and ensuring that no one has to face such challenges alone.</p>
+      <p>Thank you for reading my story. Let’s work together to make a difference.</p>
+      <p><strong>With gratitude,<br>Shreya Srivastava</strong></p>
+    </div>
+  </div>
+
   <!-- Hero Section -->
-  <section id="home" class="hero-bg bg-cover bg-center h-96 flex items-center justify-center text-center text-white">
-    <div class="hero-overlay p-8 rounded-lg">
-      <h1 class="text-4xl font-bold mb-4">AMCARES: Saving Lives Through Organ Donation</h1>
-      <p class="text-lg mb-6">Join us in raising awareness and supporting organ donors and recipients across India.</p>
-      <a href="#pledge" class="bg-primary hover:bg-primary-dark text-white font-bold py-2 px-4 rounded">Pledge to Donate</a>
+  <section id="home" class="hero">
+    <div class="particles" id="particles"></div>
+    <div class="hero-content">
+      <h1>AMCARES: Saving Lives <span class="heartbeat"></span> One Donation at a Time</h1>
+      <p>Join us in raising awareness and supporting organ donors and recipients across India with compassion and innovation.</p>
+      <a href="#pledge" class="btn">Pledge to Donate</a>
     </div>
   </section>
 
   <!-- About Section -->
-  <section id="about" class="py-16 section-bg-light">
-    <div class="container mx-auto px-4">
-      <h2 class="text-3xl font-bold text-center mb-8 text-dark-gray">About AMCARES</h2>
-      <p class="text-lg text-dark-gray max-w-3xl mx-auto">
-        AMCARES (Awareness and Medical Care for Organ Recipients and Supporters) is a non-profit dedicated to promoting organ donation in India. Our mission is to educate communities, facilitate organ pledges, and support patients and families through the transplant journey. With only 0.65 donors per million population in India, we aim to bridge the gap between the 500,000 organs needed annually and the 3,500 transplants performed.
-      </p>
-      <div class="mt-8 grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-        <div>
-          <i class="fas fa-heart text-4xl icon-primary mb-4"></i>
-          <h3 class="text-xl font-semibold text-dark-gray">Raise Awareness</h3>
-          <p class="text-dark-gray">Educate the public about organ donation and dispel myths.</p>
+  <section id="about" class="about">
+    <div class="container">
+      <h2>About Us</h2>
+      <div class="about-content">
+        <div class="about-text">
+          <p>AMCARES Health Organization, founded in 2018 by Shreya Srivastava, is a pioneering non-profit dedicated to transforming lives through organ donation in India. Inspired by Shreya's personal journey of saving her father's life through a liver transplant, we aim to bridge the critical gap between the 500,000 organs needed annually and the mere 3,500 transplants performed, addressing the low donor rate of 0.65 per million population.</p>
+          <p><strong>Our Mission:</strong> To raise awareness, dispel myths, and facilitate organ donation while providing holistic support to patients and families.</p>
+          <p><strong>Our Vision:</strong> A future where every Indian in need of an organ transplant has access to one, supported by a robust community of donors and advocates.</p>
+          <p><strong>Our Team:</strong> Led by Dr. Anil Sharma, a renowned transplant surgeon, and supported by a team of doctors, counselors, and volunteers, we work tirelessly to educate communities, partner with hospitals like Medanta and Apollo, and advocate for policy changes with NOTTO.</p>
         </div>
-        <div>
-          <i class="fas fa-hand-holding-heart text-4xl icon-accent mb-4"></i>
-          <h3 class="text-xl font-semibold text-dark-gray">Facilitate Donation</h3>
-          <p class="text-dark-gray">Connect donors and recipients through our pledge registry.</p>
+      </div>
+      <div class="about-stats">
+        <div class="stat-card">
+          <h3>12,000+</h3>
+          <p>Pledges Registered</p>
         </div>
-        <div>
-          <i class="fas fa-users text-4xl icon-secondary mb-4"></i>
-          <h3 class="text-xl font-semibold text-dark-gray">Support Families</h3>
-          <p class="text-dark-gray">Provide counseling and financial guidance for transplant patients.</p>
+        <div class="stat-card">
+          <h3>60+</h3>
+          <p>Awareness Campaigns</p>
+        </div>
+        <div class="stat-card">
+          <h3>1,500+</h3>
+          <p>Families Supported</p>
+        </div>
+        <div class="stat-card">
+          <h3>25+</h3>
+          <p>Hospital Partnerships</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Pledge Section -->
-  <section id="pledge" class="py-16 section-bg-pink">
-    <div class="container mx-auto px-4">
-      <h2 class="text-3xl font-bold text-center mb-8 text-dark-gray">Pledge to Be an Organ Donor</h2>
-      <p class="text-lg text-dark-gray max-w-3xl mx-auto text-center mb-8">
-        One donor can save up to 8 lives. Register today to pledge your organs and join our mission to save lives. Your decision can bring hope to thousands waiting for a transplant.
-      </p>
-      <form id="pledge-form" class="max-w-lg mx-auto bg-white p-8 rounded-lg shadow-md">
-        <div class="mb-4">
-          <label for="name" class="block text-dark-gray font-semibold">Full Name</label>
-          <input type="text" id="name" required class="w-full p-2 mt-1 border rounded focus:outline-none focus:ring-2 focus:ring-accent">
-        </div>
-        <div class="mb-4">
-          <label for="email" class="block text-dark-gray font-semibold">Email</label>
-          <input type="email" id="email" required class="w-full p-2 mt-1 border rounded focus:outline-none focus:ring-2 focus:ring-accent">
-        </div>
-        <div class="mb-4">
-          <label for="phone" class="block text-dark-gray font-semibold">Phone Number</label>
-          <input type="tel" id="phone" required class="w-full p-2 mt-1 border rounded focus:outline-none focus:ring-2 focus:ring-accent">
-        </div>
-        <div class="mb-4">
-          <label for="blood-group" class="block text-dark-gray font-semibold">Blood Group</label>
-          <select id="blood-group" required class="w-full p-2 mt-1 border rounded focus:outline-none focus:ring-2 focus:ring-accent">
-            <option value="">Select Blood Group</option>
-            <option value="A+">A+</option>
-            <option value="A-">A-</option>
-            <option value="B+">B+</option>
-            <option value="B-">B-</option>
-            <option value="AB+">AB+</option>
-            <option value="AB-">AB-</option>
-            <option value="O+">O+</option>
-            <option value="O-">O-</option>
-          </select>
-        </div>
-        <button type="submit" class="w-full bg-accent hover:bg-accent-dark text-white font-bold py-2 rounded">Submit Pledge</button>
+  <section id="pledge" class="pledge">
+    <div class="container">
+      <h2>Pledge to Be an Organ Donor</h2>
+      <p>One donor can save up to 8 lives. Join our mission today and make a difference!</p>
+      <form id="pledge-form" class="pledge-form">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" required>
+        <label for="email">Email</label>
+        <input type="email" id="email" required>
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" required>
+        <label for="blood-group">Blood Group</label>
+        <select id="blood-group" required>
+          <option value="">Select Blood Group</option>
+          <option value="A+">A+</option>
+          <option value="A-">A-</option>
+          <option value="B+">B+</option>
+          <option value="B-">B-</option>
+          <option value="AB+">AB+</option>
+          <option value="AB-">AB-</option>
+          <option value="O+">O+</option>
+          <option value="O-">O-</option>
+        </select>
+        <button type="submit">Submit Pledge</button>
       </form>
-      <p id="pledge-message" class="text-center mt-4 text-primary hidden">Thank you for pledging! You'll receive a donor card soon.</p>
+      <p id="pledge-message" class="pledge-message">Thank you for pledging! You'll receive a donor card soon.</p>
     </div>
   </section>
 
   <!-- Resources Section -->
-  <section id="resources" class="py-16 section-bg-light">
-    <div class="container mx-auto px-4">
-      <h2 class="text-3xl font-bold text-center mb-8 text-dark-gray">Resources</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div class="bg-white p-6 rounded-lg shadow-md">
-          <h3 class="text-xl font-semibold mb-4 text-dark-gray">What is Organ Donation?</h3>
-          <p class="text-dark-gray">Learn about deceased and living organ donation, including brain death and how one donor can save up to 8 lives.</p>
-          <a href="#" class="text-accent hover:underline mt-4 inline-block">Read More</a>
+  <section id="resources" class="resources">
+    <div class="container">
+      <h2>Resources</h2>
+      <div class="resources-grid">
+        <div class="resource-card">
+          <h3>What is Organ Donation?</h3>
+          <p>Learn about deceased and living organ donation, including brain death.</p>
+          <a href="#">Read More</a>
         </div>
-        <div class="bg-white p-6 rounded-lg shadow-md">
-          <h3 class="text-xl font-semibold mb-4 text-dark-gray">Myths vs. Facts</h3>
-          <p class="text-dark-gray">Dispel common myths, such as organ donation conflicting with religious beliefs or affecting medical care.</p>
-          <a href="#" class="text-accent hover:underline mt-4 inline-block">Read More</a>
+        <div class="resource-card">
+          <h3>Myths vs. Facts</h3>
+          <p>Dispel common myths about organ donation and religion.</p>
+          <a href="#">Read More</a>
         </div>
-        <div class="bg-white p-6 rounded-lg shadow-md">
-          <h3 class="text-xl font-semibold mb-4 text-dark-gray">Transplant Process</h3>
-          <p class="text-dark-gray">Understand the steps of liver transplantation, from evaluation to post-transplant care.</p>
-          <a href="#" class="text-accent hover:underline mt-4 inline-block">Read More</a>
+        <div class="resource-card">
+          <h3>Transplant Process</h3>
+          <p>Understand the steps of liver transplantation.</p>
+          <a href="#">Read More</a>
         </div>
-        <div class="bg-white p-6 rounded-lg shadow-md">
-          <h3 class="text-xl font-semibold mb-4 text-dark-gray">Success Stories</h3>
-          <p class="text-dark-gray">Read inspiring stories of donors and recipients who have transformed lives.</p>
-          <a href="#" class="text-accent hover:underline mt-4 inline-block">Read More</a>
+        <div class="resource-card">
+          <h3>Success Stories</h3>
+          <p>Read inspiring stories of donors and recipients.</p>
+          <a href="#">Read More</a>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Support Section -->
-  <section id="support" class="py-16 section-bg-pink">
-    <div class="container mx-auto px-4">
-      <h2 class="text-3xl font-bold text-center mb-8 text-dark-gray">Support for Patients and Families</h2>
-      <p class="text-lg text-dark-gray max-w-3xl mx-auto text-center mb-8">
-        AMCARES provides counseling, financial guidance, and logistical support for transplant patients and their families. Contact us to learn about funding options and hospital partnerships.
-      </p>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-        <div>
-          <i class="fas fa-comment-medical text-4xl icon-primary mb-4"></i>
-          <h3 class="text-xl font-semibold text-dark-gray">Counseling</h3>
-          <p class="text-dark-gray">Emotional support for donors, recipients, and families.</p>
+  <section id="support" class="support">
+    <div class="container">
+      <h2>Support for Patients and Families</h2>
+      <div class="support-grid">
+        <div class="support-card">
+          <i class="fas fa-comment-medical"></i>
+          <h3>Counseling</h3>
+          <p>Emotional support for donors, recipients, and families.</p>
         </div>
-        <div>
-          <i class="fas fa-hospital text-4xl icon-accent mb-4"></i>
-          <h3 class="text-xl font-semibold text-dark-gray">Hospital Partnerships</h3>
-          <p class="text-dark-gray">Connections with top transplant centers like Medanta and Apollo.</p>
+        <div class="support-card">
+          <i class="fas fa-hospital"></i>
+          <h3>Hospital Partnerships</h3>
+          <p>Connections with top transplant centers.</p>
         </div>
-        <div>
-          <i class="fas fa-donate text-4xl icon-secondary mb-4"></i>
-          <h3 class="text-xl font-semibold text-dark-gray">Financial Aid</h3>
-          <p class="text-dark-gray">Guidance on funding and government schemes like NOTP.</p>
+        <div class="support-card">
+          <i class="fas fa-donate"></i>
+          <h3>Financial Aid</h3>
+          <p>Guidance on funding and government schemes.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Donate Section -->
-  <section id="donate" class="py-16 section-bg-light">
-    <div class="container mx-auto px-4">
-      <h2 class="text-3xl font-bold text-center mb-8 text-dark-gray">Support Our Mission</h2>
-      <p class="text-lg text-dark-gray max-w-3xl mx-auto text-center mb-8">
-        Your donations help us raise awareness, support patients, and facilitate organ donations. Every contribution saves lives.
-      </p>
-      <div class="text-center">
-        <a href="#" class="bg-secondary hover:bg-secondary-dark text-dark-gray font-bold py-2 px-4 rounded">Donate Now</a>
-      </div>
+  <section id="donate" class="donate">
+    <div class="container">
+      <h2>Support Our Mission</h2>
+      <p>Your donations help us raise awareness and support patients. Every contribution saves lives.</p>
+      <a href="#" class="btn">Donate Now</a>
     </div>
   </section>
 
   <!-- Contact Section -->
-  <section id="contact" class="py-16 section-bg-pink">
-    <div class="container mx-auto px-4">
-      <h2 class="text-3xl font-bold text-center mb-8 text-dark-gray">Contact Us</h2>
-      <p class="text-lg text-dark-gray max-w-3xl mx-auto text-center mb-8">
-        Reach out to AMCARES for inquiries, partnerships, or support. Call our helpline or email us.
-      </p>
-      <div class="text-center">
-        <p><i class="fas fa-phone-alt mr-2 icon-primary"></i> Toll-Free: 9452683794-AMCARES</p>
-        <p><i class="fas fa-envelope mr-2 icon-primary"></i> amcareshealthorganization@gmail.com</p>
-        <p><i class="fas fa-map-marker-alt mr-2 icon-primary"></i> Delhi, India</p>
+  <section id="contact" class="contact">
+    <div class="container">
+      <h2>Contact Us</h2>
+      <p>Reach out to AMCARES for inquiries, partnerships, or support.</p>
+      <div class="contact-details">
+        <p><i class="fas fa-phone-alt"></i> Toll-Free: 9452683794-AMCARES</p>
+        <p><i class="fas fa-envelope"></i> amcareshealthorganization@gmail.com</p>
+        <p><i class="fas fa-map-marker-alt"></i> Delhi, India</p>
       </div>
     </div>
   </section>
 
   <!-- Footer -->
-  <footer class="bg-accent text-white p-4">
-    <div class="container mx-auto px-4 text-center">
-      <p>© 2025 AMCARES. All rights reserved.</p>
-       <p>Founder - Shreya Srivastava.</p>
-      <div class="mt-4 space-x-4">
-        <a href="#" class="hover:text-secondary"><i class="fab fa-facebook-f"></i></a>
-        <a href="#" class="hover:text-secondary"><i class="fab fa-twitter"></i></a>
-        <a href="#" class="hover:text-secondary"><i class="fab fa-instagram"></i></a>
-        <a href="#" class="hover:text-secondary"><i class="fab fa-linkedin-in"></i></a>
+  <footer class="footer">
+    <div class="container">
+      <p>© 2025 AMCARES Health Organization. All rights reserved.</p>
+      <p>Founder - Shreya Srivastava</p>
+      <div>
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#"><i class="fab fa-linkedin-in"></i></a>
       </div>
     </div>
   </footer>
 
+  <!-- Back to Top Button -->
+  <a href="#home" class="back-to-top" id="back-to-top">
+    <i class="fas fa-chevron-up"></i>
+  </a>
+
+  <!-- Chatbot -->
+  <div class="chatbot">
+    <div class="chatbot-btn" onclick="toggleChat()">
+      <i class="fas fa-robot"></i>
+    </div>
+    <div class="chatbot-window" id="chatbot-window">
+      <div class="chatbot-header">
+        <h3>AMCARES AI Assistant</h3>
+        <span class="close-chat" onclick="toggleChat()">×</span>
+      </div>
+      <div class="chatbot-body" id="chatbot-body">
+        <div class="chat-message bot">
+          <div class="message">Hello! I'm AMCARES AI Assistant. How can I help you today? You can ask about liver transplants, AMCARES, organ donation, pledging, myths, or anything related!</div>
+        </div>
+      </div>
+      <div class="chatbot-footer">
+        <input type="text" id="chat-input" placeholder="Type your message..." onkeypress="if(event.key === 'Enter') sendMessage()">
+        <button onclick="sendMessage()">Send</button>
+      </div>
+    </div>
+  </div>
+
   <script>
+    // Modal Functionality for My Story
+    function openModal() {
+      document.getElementById('story-modal').style.display = 'flex';
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      document.getElementById('story-modal').style.display = 'none';
+      document.body.style.overflow = 'auto';
+    }
+
+    window.onclick = function(event) {
+      const modal = document.getElementById('story-modal');
+      if (event.target === modal) {
+        closeModal();
+      }
+    }
+
+    // Hamburger Menu Toggle
+    function toggleMenu() {
+      const navLinks = document.getElementById('nav-links');
+      navLinks.classList.toggle('active');
+    }
+
     // Pledge Form Submission
     document.getElementById('pledge-form').addEventListener('submit', function(e) {
       e.preventDefault();
@@ -236,16 +1373,113 @@
       const phone = document.getElementById('phone').value;
       const bloodGroup = document.getElementById('blood-group').value;
 
-      // Simulate form submission (replace with actual backend integration)
       console.log('Pledge Submitted:', { name, email, phone, bloodGroup });
-      document.getElementById('pledge-message').classList.remove('hidden');
+      document.getElementById('pledge-message').style.display = 'block';
       document.getElementById('pledge-form').reset();
 
-      // Hide message after 5 seconds
       setTimeout(() => {
-        document.getElementById('pledge-message').classList.add('hidden');
+        document.getElementById('pledge-message').style.display = 'none';
       }, 5000);
     });
+
+    // Particle Animation in Hero Section
+    function createParticles() {
+      const particlesContainer = document.getElementById('particles');
+      const numParticles = 30;
+      for (let i = 0; i < numParticles; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+        particle.style.width = `${Math.random() * 5 + 5}px`;
+        particle.style.height = particle.style.width;
+        particle.style.left = `${Math.random() * 100}vw`;
+        particle.style.animationDelay = `${Math.random() * 5}s`;
+        particle.style.animationDuration = `${Math.random() * 5 + 5}s`;
+        particlesContainer.appendChild(particle);
+      }
+    }
+    createParticles();
+
+    // Back to Top Button Visibility
+    window.onscroll = function() {
+      const backToTop = document.getElementById('back-to-top');
+      if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+        backToTop.classList.add('visible');
+      } else {
+        backToTop.classList.remove('visible');
+      }
+    };
+
+    // Intersection Observer for Fade-In Animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.stat-card, .resource-card, .support-card, .pledge-form, .btn').forEach(element => {
+      observer.observe(element);
+    });
+
+    // Chatbot Functionality
+    function toggleChat() {
+      const chatWindow = document.getElementById('chatbot-window');
+      chatWindow.style.display = chatWindow.style.display === 'flex' ? 'none' : 'flex';
+    }
+
+    // AI Model (Simple Rule-Based)
+    const aiModel = {
+      responses: {
+        'what is organ donation': 'Organ donation is the process of giving an organ or a part of an organ to be transplanted into another person. It can be deceased donation (after death) or living donation (e.g., a kidney or part of a liver). Learn more in the <a href="#resources">Resources</a> section!',
+        'how can i pledge': 'You can pledge to be an organ donor by filling out the form in the <a href="#pledge">Pledge to Donate</a> section. It’s simple—just provide your details, and you’ll receive a donor card!',
+        'myths about organ donation': 'There are many myths about organ donation, such as the belief that it goes against religion or that doctors won’t save you if you’re a donor. These are not true! Check out the <a href="#resources">Myths vs. Facts</a> section for more details.',
+        'how to donate': 'If you mean donating money, you can contribute via the <a href="#donate">Donate</a> section. If you’re interested in organ donation, please pledge in the <a href="#pledge">Pledge to Donate</a> section.',
+        'tell me about amcares': 'AMCARES Health Organization, founded in 2018 by Shreya Srivastava, is a non-profit dedicated to raising awareness about organ donation in India. We support patients and families, partner with hospitals, and advocate for policy changes. Read more in the <a href="#about">About Us</a> section!',
+        'liver transplant': 'A liver transplant is a surgical procedure to replace a diseased liver with a healthy liver from a donor. It’s often needed for conditions like liver cancer, cirrhosis, or acute liver failure. The process involves matching a donor (living or deceased) with the recipient, conducting extensive tests (like blood group matching and liver function tests), and performing the surgery, which can take 12-20 hours. If the blood groups don’t match, an ABO-incompatible transplant may be done with additional treatments to reduce rejection risks. Recovery typically takes 2-4 weeks in the hospital and several months at home, with lifelong immunosuppressive medications to prevent rejection. For more details, check out the <a href="#resources">Transplant Process</a> section!',
+        'about liver transplant': 'A liver transplant is a surgical procedure to replace a diseased liver with a healthy liver from a donor. It’s often needed for conditions like liver cancer, cirrhosis, or acute liver failure. The process involves matching a donor (living or deceased) with the recipient, conducting extensive tests (like blood group matching and liver function tests), and performing the surgery, which can take 12-20 hours. If the blood groups don’t match, an ABO-incompatible transplant may be done with additional treatments to reduce rejection risks. Recovery typically takes 2-4 weeks in the hospital and several months at home, with lifelong immunosuppressive medications to prevent rejection. For more details, check out the <a href="#resources">Transplant Process</a> section!',
+        'what is a liver transplant': 'A liver transplant is a surgical procedure to replace a diseased liver with a healthy liver from a donor. It’s often needed for conditions like liver cancer, cirrhosis, or acute liver failure. The process involves matching a donor (living or deceased) with the recipient, conducting extensive tests (like blood group matching and liver function tests), and performing the surgery, which can take 12-20 hours. If the blood groups don’t match, an ABO-incompatible transplant may be done with additional treatments to reduce rejection risks. Recovery typically takes 2-4 weeks in the hospital and several months at home, with lifelong immunosuppressive medications to prevent rejection. For more details, check out the <a href="#resources">Transplant Process</a> section!',
+        'amcares': 'AMCARES Health Organization, founded in 2018 by Shreya Srivastava, a software developer, is a non-profit dedicated to transforming lives through organ donation in India. Inspired by Shreya’s personal journey of saving her father’s life with a liver transplant, we focus on raising awareness, dispelling myths, and facilitating organ donation. We provide holistic support to patients and families, including counseling, hospital partnerships, and financial aid guidance. AMCARES has conducted over 60 awareness campaigns, supported 1,500+ families, and partnered with 25+ hospitals like Medanta and Apollo. We also advocate for policy changes with NOTTO to improve organ donation rates. Learn more in the <a href="#about">About Us</a> section!',
+        'about amcares': 'AMCARES Health Organization, founded in 2018 by Shreya Srivastava, a software developer, is a non-profit dedicated to transforming lives through organ donation in India. Inspired by Shreya’s personal journey of saving her father’s life with a liver transplant, we focus on raising awareness, dispelling myths, and facilitating organ donation. We provide holistic support to patients and families, including counseling, hospital partnerships, and financial aid guidance. AMCARES has conducted over 60 awareness campaigns, supported 1,500+ families, and partnered with 25+ hospitals like Medanta and Apollo. We also advocate for policy changes with NOTTO to improve organ donation rates. Learn more in the <a href="#about">About Us</a> section!',
+        'who is the founder': 'The founder of AMCARES is Shreya Srivastava, a software developer. She started AMCARES in 2018, inspired by her personal experience of saving her father’s life through a liver transplant. Her journey of resilience and love drives our mission to raise awareness and support organ donation in India. You can read her full story in the <a href="#" onclick="openModal()">My Story</a> section!',
+        'shreya srivastava': 'Shreya Srivastava, a software developer, is the founder of AMCARES Health Organization, established in 2018. Inspired by her personal journey of saving her father’s life through a liver transplant, Shreya started AMCARES to raise awareness about organ donation, dispel myths, and support patients and families across India. Her story of resilience and love is at the heart of our mission. You can read more about her journey in the <a href="#" onclick="openModal()">My Story</a> section!',
+        'default': 'I’m sorry, I didn’t understand that. Could you please rephrase your question? Or you can reach out to us directly in the <a href="#contact">Contact</a> section.'
+      },
+      getResponse(message) {
+        const msg = message.toLowerCase().trim();
+        for (const key in this.responses) {
+          if (msg.includes(key)) {
+            return this.responses[key];
+          }
+        }
+        return this.responses['default'];
+      }
+    };
+
+    function sendMessage() {
+      const chatInput = document.getElementById('chat-input');
+      const chatBody = document.getElementById('chatbot-body');
+      const message = chatInput.value.trim();
+
+      if (message === '') return;
+
+      // Add user message
+      const userMessage = document.createElement('div');
+      userMessage.classList.add('chat-message', 'user');
+      userMessage.innerHTML = `<div class="message">${message}</div>`;
+      chatBody.appendChild(userMessage);
+
+      // Get AI response
+      const aiResponse = aiModel.getResponse(message);
+      const botMessage = document.createElement('div');
+      botMessage.classList.add('chat-message', 'bot');
+      botMessage.innerHTML = `<div class="message">${aiResponse}</div>`;
+      chatBody.appendChild(botMessage);
+
+      // Clear input and scroll to bottom
+      chatInput.value = '';
+      chatBody.scrollTop = chatBody.scrollHeight;
+    }
   </script>
 </body>
 </html>
