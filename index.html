@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="AMCAres, founded by Shreya Srivastava in 2025, is a healthtech startup guiding patients through organ transplants and promoting organ donation awareness.">
-  <meta name="keywords" content="AMCAres, organ transplant, organ donation, healthtech, Shreya Srivastava, healthcare navigation">
-  <meta name="author" content="AMCAres">
+  <meta name="description" content="AMCARES, Because we care, is a healthtech startup guiding patients through organ transplants and promoting organ donation awareness.">
+  <meta name="keywords" content="AMCARES, organ transplant, organ donation, healthtech, Shreya Srivastava, healthcare navigation">
+  <meta name="author" content="AMCARES">
   <title>AMCARES - Navigate Transplants with Ease</title>
   <script src="https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/react-dom@18.2.0/umd/react-dom.production.min.js"></script>
@@ -88,14 +88,14 @@
       const slides = [
         {
           title: "Simplify Your Transplant Journey",
-          subtitle: "AMCAres offers tools to guide you through organ transplants.",
+          subtitle: "AMCARES, Because we care, offers tools to guide you through organ transplants.",
           cta: "Explore Tools",
           href: "#tools",
           bgImage: "https://via.placeholder.com/1920x800?text=TransplantJourney"
         },
         {
           title: "Champion Organ Donation",
-          subtitle: "Join AMCAres in raising awareness to save lives.",
+          subtitle: "Join AMCARES in raising awareness to save lives.",
           cta: "Learn More",
           href: "#awareness",
           bgImage: "https://via.placeholder.com/1920x800?text=OrganDonation"
@@ -155,14 +155,14 @@
 
     function Chatbot() {
       const [isOpen, setIsOpen] = React.useState(false);
-      const [messages, setMessages] = React.useState([{ sender: 'bot', text: 'Hi! I’m AMCAres’ AI assistant. How can I help you with organ transplants or donation?' }]);
+      const [messages, setMessages] = React.useState([{ sender: 'bot', text: 'Hi Buddy! I’m AMCARES’. How can I help you with organ transplants or donation?' }]);
       const [input, setInput] = React.useState('');
 
       const responses = {
-        'transplant': 'AMCAres offers tools like the Transplant Center Finder, Financial Guidance, and Care Planner to simplify your transplant journey. Would you like details on any of these?',
+        'transplant': 'AMCARES offers tools like the Transplant Center Finder, Financial Guidance, and Care Planner to simplify your transplant journey. Would you like details on any of these?',
         'donation': 'Organ donation saves lives! You can register as a donor through your state’s registry or organizations like Donate Life. Want to learn more about the process?',
-        'amcares': 'AMCAres, founded by Shreya Srivastava in 2025, is a healthtech startup focused on organ transplant navigation and awareness. Check out our Tools or Awareness sections!',
-        'default': 'I’m here to help! Could you clarify or ask about transplants, donation, or AMCAres’ services?'
+        'amcares': 'AMCARES, founded by Shreya Srivastava in 2025, is a healthtech startup focused on organ transplant navigation and awareness. Check out our Tools or Awareness sections!',
+        'default': 'I’m here to help! Could you clarify or ask about transplants, donation, or AMCARES’ services?'
       };
 
       const handleSend = () => {
@@ -188,7 +188,7 @@
           </button>
           <div className={`chatbot absolute bottom-16 right-0 w-80 bg-white rounded-lg shadow-xl transform ${isOpen ? 'translate-y-0' : 'translate-y-full'} transition-transform duration-300 ${isOpen ? 'block' : 'hidden'}`}>
             <div className="bg-blue-500 text-white p-4 rounded-t-lg flex justify-between items-center">
-              <h3 className="text-lg font-semibold">AMCAres Assistant</h3>
+              <h3 className="text-lg font-semibold">AMCARES Assistant</h3>
               <button onClick={() => setIsOpen(false)} aria-label="Close chatbot">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
