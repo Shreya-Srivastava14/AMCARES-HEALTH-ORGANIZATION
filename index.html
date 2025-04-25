@@ -292,9 +292,9 @@
 
     function Awareness() {
       const testimonials = [
-        { name: "Sarah M.", quote: "AMCARES made my transplant journey hopeful." },
-        { name: "Dr. Anil P.", quote: "Their awareness efforts are transformative." },
-        { name: "Ashish S.", quote: "I registered as a donor thanks to AMCARES." }
+        { name: "Sarah M.", quote:"AMCARES made my transplant journey hopeful."},
+        { name: "Dr. Anil P.", quote:"Their awareness efforts are transformative."},
+        { name: "Ashish S.", quote:"I registered as a donor thanks to AMCARES."}
       ];
 
       return (
@@ -317,7 +317,7 @@
             <div className="overflow-hidden mb-12">
               <div className="ticker flex whitespace-nowrap">
                 {testimonials.concat(testimonials).map((testimonial, index) => (
-                  <div key={index} className="inline-block px-4">
+                  <div key={index} className="inline-block px-5">
                     <div className="bg-blue-100 p-4 rounded-lg shadow-lg w-80">
                       <p className="text-gray-700 italic mb-2">"{testimonial.quote}"</p>
                       <p className="text-blue-600 font-semibold">{testimonial.name}</p>
